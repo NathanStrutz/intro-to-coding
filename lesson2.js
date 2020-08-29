@@ -2,14 +2,15 @@ console.log("Hello World!");
 
 // Phone Number
 console.log("555-123-4567");
-console.log(555 - 123 - 4567);
+console.log(555-123-4567);
 
-// Explaining booleans
+// Are computers bad at math? let's try booleans
 let badAtMath = 1 > 2;
 if (badAtMath) {
   throw "Crash & Burn";
 }
 
+// Operators
 let x = 1;
 console.log(x++); // x is 2
 console.log(x--); // x is 1
