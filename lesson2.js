@@ -22,7 +22,6 @@ console.log(x * 2); // 6
 console.log(x % 2); // 1 (remainder of 3/2)
 console.log(x ** 3); // 27 (3 cubed)
 console.log(x === 3); // true
-console.log(x !== 4); // true
-console.log((x = "Hello")); // x is now a string
-console.log(x === 1 || x === "Hello"); // true
-console.log(x === 1 && x === "Hello"); // false
+console.log(x !== 3); // false
+console.log(x === 1 || x === 3); // true
+console.log(x === 1 && x === 3); // false
