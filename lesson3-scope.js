@@ -44,14 +44,14 @@ console.log(c); // <-- Error!
 
 
 
-// Part 4 - Compilation error
+// Part 4 - Can't declare it after it's used
 let d = 6;
 {
     console.log(d); // <-- Error here!
     let d = 7; // <!------ because of this
 }
 /**
- * This one throws an error because of variable hoisting.
- * Once "d" is used on the inside scope, it can't be declared again.
- * Not just console.log, too; we could set "d=8" then "let d=9", same problem.
+ * This one also throws an error.
+ * The outside "d" is used on the inside scope.
+ * It can't be declared after it's used.
  */
