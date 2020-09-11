@@ -39,13 +39,19 @@ cl("-----------------------------------")
 cl("Oh Christmas Tree - normal solution");
 for (let count1 = 1; count1 < 8; count1++) {
   let tree = "";
-  for (let count2 = 1; count2 < count1; count2++) {
+  for (let count2 = 1; count2 <= count1; count2++) {
     tree += "#";
   }
   cl(tree);
 }
 
 cl("-----------------------------------")
+cl("Oh Christmas Tree - Samantha's solution");
+for(let tree = "#"; tree.length < 8; tree += "#") {
+  cl(tree);
+}
+
+cl("-----------------------------------")
 cl("Oh Christmas Tree - short solution");
-[...Array(7)].map((_, i) => cl("#".repeat(i)));
+[...Array(7)].map((_, i) => cl("#".repeat(i+1)));
 
