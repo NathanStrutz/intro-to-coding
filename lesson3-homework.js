@@ -36,7 +36,7 @@ name.split("").map(v=>cl(v));
 
 
 cl("-----------------------------------")
-cl("Oh Christmas Tree - normal solution");
+cl("Oh Christmas Tree - 2-loop solution");
 for (let count1 = 1; count1 < 8; count1++) {
   let tree = "";
   for (let count2 = 1; count2 <= count1; count2++) {
