@@ -59,7 +59,7 @@ let getGreeting4 = function(name, timeOfDay) {
   return "Good " + timeOfDay + ", " + name;
 }
 // Call with multiple arguments
-let greeting4 = getGreeting4("Bob", "morning");
+let greeting4 = getGreeting4("Bob", "evening");
 console.log(greeting4);
 
 
@@ -74,3 +74,19 @@ cl(greeting5a);
 let greeting5b = getGreeting5("Bob", "afternoon");
 cl(greeting5b);
 
+
+// 9. FizzBuzz function
+let fizzBuzz = function(min, max) {
+  for (let count = min; count <= max; count++) {
+    if (count % 3 === 0 && count % 5 === 0) {
+      console.log("FizzBuzz");
+    } else if (count % 3 === 0) {
+      console.log("Fizz");
+    } else if (count % 5 === 0) {
+      console.log("Buzz");
+    } else {
+      console.log(count);
+    }
+  }
+}
+fizzBuzz(14, 21);
