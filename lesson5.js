@@ -1,3 +1,7 @@
-// Times Tables
-let grid = [...Array(13)].map((_,across)=>[...Array(13)].map((_,down)=>across*down))
-console.table(grid);
+let cl = console.log;
+
+let d = new Date("1/1/2020 1:23:45");
+cl(d);
+
+
+
