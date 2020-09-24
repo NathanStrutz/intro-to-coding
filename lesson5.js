@@ -67,6 +67,13 @@ let cl = console.log;
   cl(o[key]);
 }
 
+// Math
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
+cl(Math.round(Math.PI));
+cl(Math.round(Math.random() * 4))
+
+
+// Date
 let d = new Date("9/24/2020 1:23:45");
 cl(d.getFullYear());
 d.setFullYear(2015);
