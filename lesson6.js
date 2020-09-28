@@ -11,15 +11,16 @@ let match = function() {
 	let p1 = getRockPaperScissors();
 	let p2 = getRockPaperScissors();
 	cl("Player 1 throws up", p1, "but Player 2 has", p2);
-	let winner = decideWinner(p1, p2)
+	// let winner = decideWinner1(p1, p2)
+	let winner = decideWinner2(p1, p2);
 	cl("The winner is... " + winner + "!");
 }
 
-let decideWinner = function(p1RPS, p2RPS) {
+let decideWinner1 = function(p1RPS, p2RPS) {
 	if (p1RPS === "Rock") {
 		// rock beats scissors
 		if (p2RPS === "Scissors") {
-			return "Player 1"
+			return "Player 1";
 		}
 		// rock loses to paper
 		if (p2RPS === "Paper") {
@@ -29,7 +30,7 @@ let decideWinner = function(p1RPS, p2RPS) {
 	if (p1RPS === "Paper") {
 		// paper beats rock
 		if (p2RPS === "Rock") {
-			return "Player 1"
+			return "Player 1";
 		}
 		// paper loses to scissors
 		if (p2RPS === "Scissors") {
@@ -39,7 +40,7 @@ let decideWinner = function(p1RPS, p2RPS) {
 	if (p1RPS === "Scissors") {
 		// scissors beats paper
 		if (p2RPS === "Paper") {
-			return "Player 1"
+			return "Player 1";
 		}
 		// scissors lose to rock
 		if (p2RPS === "Rock") {
@@ -51,21 +52,36 @@ let decideWinner = function(p1RPS, p2RPS) {
 	return "Nobody";
 }
 
+let decideWinner2 = function(p1RPS, p2RPS) {
+	let whatBeatsWhat = {};
+		whatBeatsWhat.Rock = "Scissors";
+		whatBeatsWhat.Paper = "Rock";
+		whatBeatsWhat.Scissors = "Paper";
+
+	if (whatBeatsWhat[p1RPS] === p2RPS) {
+		return "Player 1";
+	} else if (whatBeatsWhat[p2RPS] === p1RPS) {
+		return "Player 2";
+	} else {
+		return "Nobody";
+	}
+}
+
 
 setTimeout(() => {
-	cl("1...")
+	cl("1...");
 }, 0);
 
 setTimeout(() => {
-	cl("2...")
-}, 700);
+	cl("2...");
+}, 500);
 
 setTimeout(() => {
-	cl("3...")
-}, 1400);
+	cl("3...");
+}, 1000);
 
 setTimeout(() => {
 	// cl(getRockPaperScissors());
 	match();
-}, 2100)
+}, 1500)
 
