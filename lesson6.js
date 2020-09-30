@@ -10,7 +10,7 @@ let getRockPaperScissors = function() {
 let match = function() {
 	let p1 = getRockPaperScissors();
 	let p2 = getRockPaperScissors();
-	cl("Player 1 throws up", p1, "but Player 2 has", p2);
+	cl("Player 1 throws", p1, "but Player 2 has", p2);
 	// let winner = decideWinner1(p1, p2)
 	let winner = decideWinner2(p1, p2);
 	cl("The winner is... " + winner + "!");
@@ -81,7 +81,6 @@ setTimeout(() => {
 }, 1000);
 
 setTimeout(() => {
-	// cl(getRockPaperScissors());
 	match();
 }, 1500)
 
