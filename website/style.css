@@ -7,6 +7,10 @@ nav a:visited {
   color: blue;
 }
 
+main.products {
+  display: flex;
+  flex-wrap: wrap;
+}
 /* Product card */
 
 .card {
@@ -16,8 +20,12 @@ nav a:visited {
   border-radius: 4px;
   background-color: #fff;
   margin: 10px auto;
-  max-width: 344px;
+  width: 344px;
   color: #333;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .card > * {
   padding: 16px;
@@ -32,12 +40,12 @@ nav a:visited {
 }
 .card h5,
 .card h6 {
-  color: #888;
+  color: #999;
 }
 .card p {
   margin-bottom: 0;
 }
-.card .actions {
+.card .footer {
   border-top: 1px solid #e0e0e0;
   background-color: #f8f8f8;
 }
@@ -48,6 +56,9 @@ nav a:visited {
   text-transform: uppercase;
   border: 0;
   padding: 8px;
+}
+.card button:hover {
+  background-color: rgb(214, 247, 247);
 }
 .card button:active,
 .card button:focus {
