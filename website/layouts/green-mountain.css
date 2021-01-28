@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+
+header nav {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+}
+header nav a {
+  padding-right: 20px;
+}
+header nav input,
+header nav button {
+  margin: 0;
+  border: 0;
+}
+header nav form {
+  border: 1px solid #ccc;
+}
+header nav button.my-account {
+  border: 0;
+  color: white;
+  font-weight: bold;
+  background-color: orange;
+}
+
+main nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+main nav .right {
+  display: flex;
+  justify-content: space-around;
+}
+main nav .right a {
+  padding: 30px;
+  font-size: 18px;
+  color: #777;
+}
+main nav .right a:hover {
+  color: #111;
+}
+
+#welcome {
+  background-color: rgb(176, 234, 248);
+  height: 500px;
+  text-align: center;
+  padding: 100px;
+}
+
+#welcome-buttons {
+  display: flex;
+  justify-content: center;
+}
+.welcome-button {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  color: #333;
+  width: 250px;
+  margin: 20px 30px;
+  text-align: left;
+}
+.welcome-button small {
+  display: block;
+}
+.welcome-button .go {
+  background-color: orange;
+  color: white;
+  font-size: 30px;
+  padding: 0;
+  text-align: center;
+  width: 60px;
+  height: 50px;
+  line-height: 50px;
+}
+.welcome-button .text {
+  padding: 7px;
+}

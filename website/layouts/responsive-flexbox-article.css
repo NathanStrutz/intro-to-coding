@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 14pt;
+  line-height: 21pt;
+}
+header,
+footer {
+  padding: 50px;
+  background-color: #edd382;
+  text-align: center;
+}
+header h1 {
+  text-transform: uppercase;
+}
+
+main {
+  padding: 50px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: top;
+}
+
+main article {
+  margin: 25px;
+  flex-grow: 1;
+  flex-basis: 30%;
+}
+main article.headline {
+  flex-grow: 2;
+  flex-basis: 50%;
+}
+main article h3 {
+  font-weight: 300;
+}
+main article p {
+  font-size: 12pt;
+  line-height: 18pt;
+}
+
+/* read more links */
+main a {
+  text-decoration: none;
+  color: black;
+  border-bottom: 5px solid black;
+  font-family: sans-serif;
+}
