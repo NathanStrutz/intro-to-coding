@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 18: Scripting Test</title>
+  </head>
+  <body>
+    <h2 id="here">Umm...</h2>
+    <button id="showhide">Show / Hide Icon</button>
+    <h2 id="icon" style="display: none; position: absolute">&#128175;</h2>
+
+    <button id="jqButton">jQuery Toggle</button>
+
+    <br /><br /><br /><br />
+
+    <section id="app">
+      <button @click="show = !show">Show & Hide with Vue</button>
+      <h2 v-if="show">&#128175;</h2>
+    </section>
+
+    <script src="lesson18-vue.js"></script>
+    <script src="lesson18-jquery.js"></script>
+    <script src="lesson18.js"></script>
+  </body>
+</html>
