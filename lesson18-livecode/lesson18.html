@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      h2 {
+        transition: opacity 1s;
+      }
+      .hidden {
+        opacity: 0;
+      }
+      .visible {
+        opacity: 1;
+      }
+    </style>
     <title>Lesson 18: Scripting Test</title>
   </head>
   <body>
@@ -17,6 +28,7 @@
 
     <section id="app">
       <button @click="show = !show">Show & Hide with Vue</button>
+      <h2 :class="show ? 'visible': 'hidden'">&#128175;</h2>
       <h2 v-if="show">&#128175;</h2>
     </section>
 

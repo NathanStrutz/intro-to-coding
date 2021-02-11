@@ -27,9 +27,9 @@ $("#jqButton").click(function () {
   $("#icon").slideToggle();
 });
 
+// Version 4, Vue.js
 // but what happens when jQuery isn't enough?
 // what if we could make a whole framework around the HTML with JavaScript?
-// here's Vue
 
 new Vue({
   el: "#app",
