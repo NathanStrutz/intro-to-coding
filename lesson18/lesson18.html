@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      section {
+        width: 85%;
+        margin: 3em auto;
+      }
+    </style>
+    <title>Testing JavaScript Stuff</title>
+  </head>
+  <!-- 
+    An all-in-one test page to show what we covered in class
+    Note the two linked JavaScript files - jquery.js and vue.js
+   -->
+  <body>
+    <!-- Part 1: Javascript can change things -->
+    <section>
+      <h1 id="test1">HTML Only!</h1>
+
+      <script>
+        let element = document.getElementById("test1");
+        element.innerText = "HTML and JavaScript!";
+        element.style.color = "#099";
+      </script>
+    </section>
+
+    <!-- Part 2: Javascript click events can make things happen -->
+    <section>
+      <button id="clickme-js">Click Me!</button>
+      <h1 id="target-js">&#128175;</h1>
+
+      <script>
+        let button = document.getElementById("clickme-js");
+        // The toggle100 function - each time you call it, it shows or hides the emoji
+        let toggle100 = function () {
+          let emoji = document.getElementById("target-js");
+          if (emoji.style.display === "none") {
+            emoji.style.display = "block";
+          } else {
+            emoji.style.display = "none";
+          }
+        };
+        // Assign the button's click event to the toggle100 function
+        button.addEventListener("click", toggle100);
+      </script>
+    </section>
+
+    <!-- Part 3: Use jQuery to do the same thing, simpler and better.
+      Note how the functions are chained together: $("").text().click()
+    -->
+    <section>
+      <button id="clickme-jq">Click Me!</button>
+      <h1 id="target-jq">&#128175;</h1>
+
+      <script src="jquery.js"></script>
+      <script>
+        $("#clickme-jq")
+          .text("Click Me From jQuery!")
+          .click(function () {
+            $("#target-jq").slideToggle();
+          });
+      </script>
+    </section>
+
+    <!-- Part 4: Vue.js.
+      Instead of hooking into the DOM and having JS tell HTML what to do,
+      Vue is rendering the HTML based on changes to the state ("data" below).
+      This is great for bigger applications than hiding one emoji ;)
+    -->
+    <section id="vue-app">
+      <button @click="show = !show">{{ buttonTitle }}</button>
+      <h1 v-if="show">&#128175;</h1>
+
+      <script src="vue.js"></script>
+      <script>
+        new Vue({
+          el: "#vue-app", // hook into the DOM here
+          data: {
+            buttonTitle: "Click from Vue!",
+            show: true,
+          },
+        });
+      </script>
+    </section>
+  </body>
+</html>
