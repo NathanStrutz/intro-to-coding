@@ -12,7 +12,7 @@
     </style>
     <title>Testing JavaScript Stuff</title>
   </head>
-  <!-- 
+  <!--
     An all-in-one test page to show what we covered in class
     Note the two linked JavaScript files - jquery.js and vue.js
    -->
@@ -56,7 +56,7 @@
       <button id="clickme-jq">Click Me!</button>
       <h1 id="target-jq">&#128175;</h1>
 
-      <script src="jquery.js"></script>
+      <script src="lib/jquery.js"></script>
       <script>
         $("#clickme-jq")
           .text("Click Me From jQuery!")
@@ -75,7 +75,7 @@
       <button @click="show = !show">{{ buttonTitle }}</button>
       <h1 v-if="show">&#128175;</h1>
 
-      <script src="vue.js"></script>
+      <script src="lib/vue.js"></script>
       <script>
         new Vue({
           el: "#vue-app", // hook into the DOM here
