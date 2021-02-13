@@ -2,16 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Test My Typing</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Nathan's Great Typing Test</title>
   </head>
-  <body>
-    <div id="testme"></div>
 
-    <script src="typing-test.js"></script>
-    <script>
-      buildTypingTest("testme");
-    </script>
+  <body>
+    <header>
+      <h2>Nathan's Great Company</h2>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About Us</a>
+      </nav>
+      <form>&#128269;</form>
+    </header>
+
+    <main>
+      <div id="typingtest"></div>
+
+      <script src="typing-test.js"></script>
+      <script>
+        buildTypingTest("typingtest");
+      </script>
+    </main>
   </body>
 </html>

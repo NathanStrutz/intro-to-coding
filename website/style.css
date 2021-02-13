@@ -110,3 +110,8 @@ main.about p:first-letter {
   float: left;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
+
+#typingtest {
+  margin: 75px auto;
+  width: 800px;
+}
