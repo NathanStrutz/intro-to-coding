@@ -1,3 +1,10 @@
+class Card {
+  rank;
+  suit;
+  color;
+  name;
+}
+
 class PackOfCards {
   createCard(suit, rank) {
     let color;
@@ -18,12 +25,11 @@ class PackOfCards {
       name = "Ace";
     }
 
-    let card = {
-      rank: rank,
-      suit: suit,
-      color: color,
-      name: name,
-    };
+    let card = new Card();
+    card.rank = rank;
+    card.suit = suit;
+    card.color = color;
+    card.name = name;
     return card;
   }
   createDeck() {
@@ -41,6 +47,7 @@ class PackOfCards {
 class Dealer {
   setNewDeck(pack) {
     this.deck = pack.createDeck();
+    return this;
   }
 
   getCard() {
@@ -87,22 +94,29 @@ class Player {
   }
 }
 
-let dealer = new Dealer();
+class Game {
+  play(iterations = 1) {
+    let dealer = new Dealer();
 
-let player1 = new Player();
-let player2 = new Player();
+    let player1 = new Player();
+    let player2 = new Player();
 
-for (let index = 0; index < 100; index++) {
-  dealer.setNewDeck(new PackOfCards());
-  player1.setNewHand(dealer.getHand(5));
-  player2.setNewHand(dealer.getHand(5));
+    for (let index = 0; index < iterations; index++) {
+      dealer.setNewDeck(new PackOfCards());
+      player1.setNewHand(dealer.getHand(5));
+      player2.setNewHand(dealer.getHand(5));
 
-  if (player1.getScore() > player2.getScore()) {
-    player1.youWin();
-  } else if (player2.getScore() > player1.getScore()) {
-    player2.youWin();
+      if (player1.getScore() > player2.getScore()) {
+        player1.youWin();
+      } else if (player2.getScore() > player1.getScore()) {
+        player2.youWin();
+      }
+    }
+
+    console.log("Player 1 wins:", player1.getWins(), "times");
+    console.log("Player 2 wins:", player2.getWins(), "times");
   }
 }
 
-console.log("Player 1 wins:", player1.getWins(), "times");
-console.log("Player 2 wins:", player2.getWins(), "times");
+// let game = new Game();
+// game.play(100);
