@@ -5,7 +5,7 @@ function setup() {
   background(35, 130, 57); // r g b
 }
 
-let dealer = new Dealer().setNewDeck(new PackOfCards());
+let dealer = new Dealer();
 let hand1 = dealer.getHand(5);
 let hand2 = dealer.getHand(5);
 let hand3 = dealer.getHand(5);
@@ -31,7 +31,6 @@ function draw() {
   }
 }
 
-let show = true;
 class VisualCard {
   constructor(x, y) {
     this.x = x;
@@ -54,11 +53,6 @@ class VisualCard {
    */
   draw(card) {
     // outer box
-    if (show) {
-      console.log(this);
-      show = !show;
-    }
-
     let cornerRadius = 8;
 
     fill("white");
