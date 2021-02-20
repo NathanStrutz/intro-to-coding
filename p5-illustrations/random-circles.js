@@ -10,11 +10,12 @@ var draw = function () {
   noStroke();
   for (let j = 0; j < canvas.height + 50; j += 50) {
     for (let i = 0; i < canvas.width + 50; i += 10) {
-      // comment this in to fill with colors - these ones are tinted red
-      fill(random(200, 255), random(100, 230), random(50, 200));
-
       // comment this in to fill with grayscale dots
       // fill(random(200, 255));
+
+      // comment this in to fill with colors - these ones are tinted red
+      fill(random(200, 255), random(100, 230), random(50, 200));
+      // high reds ^^^^^^^          ^^^ low greens & blues ^^^
 
       ellipse(i, j, random(100));
     }
