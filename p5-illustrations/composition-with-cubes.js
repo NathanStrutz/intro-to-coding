@@ -7,6 +7,7 @@ var setup = function () {
 };
 
 var draw = function () {
+  background(255);
   // set up how this grid will work
   let across = 12;
   let down = 20;
