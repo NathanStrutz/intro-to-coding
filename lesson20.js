@@ -9,37 +9,15 @@ var setup = function () {
 
 // Initialization function because `random` doesn't exist until we start drawing
 let init = function () {
-  let colors = [
-    "Aqua",
-    "Cyan",
-    "LightCyan",
-    "PaleTurquoise",
-    "Aquamarine",
-    "Turquoise",
-    "MediumTurquoise",
-    "DarkTurquoise",
-    "CadetBlue",
-    "SteelBlue",
-    "LightSteelBlue",
-    "PowderBlue",
-    "LightBlue",
-    "SkyBlue",
-    "LightSkyBlue",
-    "DeepSkyBlue",
-    "DodgerBlue",
-    "CornflowerBlue",
-    "MediumSlateBlue",
-    "RoyalBlue",
-    "Blue",
-  ];
-
   for (let index = 0; index < 1000; index++) {
     movers.push({
       x: random(canvas.width),
       y: random(canvas.height),
       w: random(30, 200),
       h: random(30, 200),
-      c: random(colors),
+      r: 255,
+      g: 255,
+      b: 255,
       jiggle: random(10),
     });
   }
@@ -60,7 +38,11 @@ var draw = function () {
 };
 
 let renderMover = function (mover) {
-  fill(mover.c);
+  mover.r = randColorRange(mover.r, 2);
+  mover.g = randColorRange(mover.g, 2);
+  mover.b = randColorRange(mover.b, 2);
+  fill(mover.r, mover.g, mover.b);
+
   mover.x = random(min(canvas.width - mover.w, mover.x - mover.jiggle), max(0, mover.x + mover.jiggle));
   mover.y = random(min(canvas.height - mover.h, mover.y - mover.jiggle), max(0, mover.y + mover.jiggle));
 
@@ -71,4 +53,12 @@ let renderMover = function (mover) {
   }
 
   rect(mover.x, mover.y, mover.w, mover.h);
+};
+
+// returns a number from 0-255 within a small range, made for semi-closely matching colors
+let randColorRange = function (currentValue, travelRange = 10) {
+  let val = round(random(currentValue - travelRange, currentValue + travelRange));
+  val = max(0, val);
+  val = min(val, 255);
+  return val;
 };
