@@ -66,9 +66,9 @@ let createSnakeLine = function () {
 
 // returns a number from 0-255 within a small range, made for semi-closely matching colors
 let randColorRange = function (currentValue, travelRange = 10) {
-  let val = Math.floor(random(currentValue - travelRange, currentValue + travelRange));
-  val = Math.max(0, val);
-  val = Math.min(val, 255);
+  let val = round(random(currentValue - travelRange, currentValue + travelRange));
+  val = max(0, val);
+  val = min(val, 255);
   return val;
 };
 
