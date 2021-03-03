@@ -115,3 +115,30 @@ main.about p:first-letter {
   margin: 75px auto;
   width: 800px;
 }
+
+main.fizzbuzz {
+  display: flex;
+  flex-wrap: wrap;
+}
+main.fizzbuzz h1,
+main.fizzbuzz h3,
+main.fizzbuzz small {
+  display: inline;
+  margin: 0;
+  padding: 0 0.5em;
+  line-height: 1em;
+  vertical-align: baseline;
+}
+main.fizzbuzz h1 {
+  font-size: 4em;
+  font-weight: bolder;
+}
+main.fizzbuzz h3 {
+  font-size: 3em;
+  padding-top: 10px;
+}
+main.fizzbuzz small {
+  font-size: 1em;
+  font-weight: 200;
+  padding-top: 2em;
+}
