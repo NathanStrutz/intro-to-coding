@@ -38,12 +38,16 @@ class Shape {
 class Square extends Shape {
   draw() {
     this.move();
+    fill(255);
     square(this.x, this.y, this.w);
   }
 }
 class Circle extends Shape {
+  c = [random(255), random(255), random(255)];
+
   draw() {
     this.move();
+    fill(this.c);
     circle(this.x, this.y, this.w);
   }
 }
