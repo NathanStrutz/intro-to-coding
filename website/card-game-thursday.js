@@ -7,14 +7,25 @@ class VisualCard {
   y = 20;
 
   getIcon() {
-    if (this.card.suit === "Diamonds") {
-      return "♦";
-    } else if (this.card.suit === "Hearts") {
-      return "♥";
-    } else if (this.card.suit === "Clubs") {
-      return "♣";
-    } else if (this.card.suit === "Spades") {
-      return "♠";
+    return {
+      Hearts: "♥",
+      Diamonds: "♦",
+      Spades: "♠",
+      Clubs: "♣",
+    }[this.card.suit];
+  }
+  getCornerName() {
+    switch (this.card.name) {
+      case "Ace":
+        return "A";
+      case "King":
+        return "K";
+      case "Queen":
+        return "Q";
+      case "Jack":
+        return "J";
+      default:
+        return this.card.name;
     }
   }
 
@@ -29,12 +40,23 @@ class VisualCard {
     textAlign(CENTER);
     text(this.getIcon(), 75, 130);
 
+    // The corners
     textSize(20);
-    textAlign(LEFT);
-    text(this.card.name, 10, 10);
+    textLeading(20);
+    textAlign(CENTER);
 
-    textAlign(RIGHT);
-    text(this.card.name, 150, 180);
+    // Top left corner
+    text(this.getCornerName() + "\n" + this.getIcon(), 16, 24);
+
+    // Rotation for the bottom-right corner
+    // spin it around and have it mirror the top-left corner
+    push();
+    {
+      translate(150, 200);
+      rotate(PI * 3);
+      text(this.getCornerName() + "\n" + this.getIcon(), 16, 24);
+    }
+    pop();
   }
 }
 
