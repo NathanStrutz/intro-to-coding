@@ -5,6 +5,14 @@ class VisualCard {
 
   x = 20;
   y = 20;
+  isDragging = false;
+
+  drag() {
+    if (this.isDragging) {
+      this.x = mouseX;
+      this.y = mouseY;
+    }
+  }
 
   getIcon() {
     return {
@@ -30,31 +38,36 @@ class VisualCard {
   }
 
   draw() {
-    translate(this.x, this.y);
-
-    fill("white");
-    rect(0, 0, 150, 200, 7);
-
-    fill(this.card.color);
-    textSize(100);
-    textAlign(CENTER);
-    text(this.getIcon(), 75, 130);
-
-    // The corners
-    textSize(20);
-    textLeading(20);
-    textAlign(CENTER);
-
-    // Top left corner
-    text(this.getCornerName() + "\n" + this.getIcon(), 16, 24);
-
-    // Rotation for the bottom-right corner
-    // spin it around and have it mirror the top-left corner
+    this.drag();
     push();
     {
-      translate(150, 200);
-      rotate(PI * 3);
+      translate(this.x, this.y);
+
+      fill("white");
+      rect(0, 0, 150, 200, 7);
+
+      fill(this.card.color);
+      textSize(100);
+      textAlign(CENTER);
+      text(this.getIcon(), 75, 130);
+
+      // The corners
+      textSize(20);
+      textLeading(20);
+      textAlign(CENTER);
+
+      // Top left corner
       text(this.getCornerName() + "\n" + this.getIcon(), 16, 24);
+
+      // Rotation for the bottom-right corner
+      // spin it around and have it mirror the top-left corner
+      push();
+      {
+        translate(150, 200);
+        rotate(PI * 3);
+        text(this.getCornerName() + "\n" + this.getIcon(), 16, 24);
+      }
+      pop();
     }
     pop();
   }
@@ -63,16 +76,29 @@ class VisualCard {
 // Get a card dealer:
 let dealer = new Dealer();
 
-let visCard1 = new VisualCard(dealer.getCard());
-
-let visCard2 = new VisualCard(dealer.getCard());
-visCard2.x = 200;
+let hand = dealer.getHand();
+let visualHand = [];
+for (let index = 0; index < hand.length; index++) {
+  const card = hand[index];
+  let vc = new VisualCard(card);
+  visualHand.push(vc);
+}
 
 var setup = function () {
   createCanvas(1000, 800);
 };
 var draw = function () {
   background("forestgreen");
-  visCard1.draw();
-  visCard2.draw();
+  for (let index = 0; index < visualHand.length; index++) {
+    const vc = visualHand[index];
+    vc.x = 170 * index + 20;
+    vc.draw();
+  }
+};
+
+window.mousePressed = function () {
+  // visCard1.isDragging = true;
+};
+window.mouseReleased = function () {
+  // visCard1.isDragging = false;
 };
