@@ -91,7 +91,6 @@ var draw = function () {
   background("forestgreen");
   for (let index = 0; index < visualHand.length; index++) {
     const vc = visualHand[index];
-    vc.x = 170 * index + 20;
     vc.draw();
   }
 };
