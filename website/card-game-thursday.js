@@ -77,22 +77,15 @@ class VisualCard {
 let dealer = new Dealer();
 
 let hand = dealer.getHand();
-let visualHand = [];
-for (let index = 0; index < hand.length; index++) {
-  const card = hand[index];
-  let vc = new VisualCard(card);
-  visualHand.push(vc);
-}
+let visualHand = hand.map((c) => new VisualCard(c));
+visualHand.forEach((vc, i) => (vc.x = i * 170 + 20));
 
 var setup = function () {
   createCanvas(1000, 800);
 };
 var draw = function () {
   background("forestgreen");
-  for (let index = 0; index < visualHand.length; index++) {
-    const vc = visualHand[index];
-    vc.draw();
-  }
+  visualHand.forEach((vc) => vc.draw());
 };
 
 window.mousePressed = function () {
