@@ -23,18 +23,7 @@ class VisualCard {
     }[this.card.suit];
   }
   getCornerName() {
-    switch (this.card.name) {
-      case "Ace":
-        return "A";
-      case "King":
-        return "K";
-      case "Queen":
-        return "Q";
-      case "Jack":
-        return "J";
-      default:
-        return this.card.name;
-    }
+    return this.card.name == this.card.rank ? this.card.name : this.card.name[0];
   }
 
   draw() {
