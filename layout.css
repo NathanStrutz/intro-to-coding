@@ -4,12 +4,12 @@ body.layout {
   flex-direction: column;
 }
 
-.HolyGrail-body {
+main {
   display: flex;
   flex: 1;
 }
 
-main {
+article {
   flex: 1;
 }
 
