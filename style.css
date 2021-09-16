@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+header {
+  padding: 10em 3em;
+  background: url(./3840x2160-code.jpg) #333 no-repeat center center fixed;
+  color: #fff;
+  text-align: center;
+}
+header h1 {
+  font-size: 6em;
+}
+footer {
+  padding: 4em 3em;
+  background: url(./3840x2160-code.jpg) #333 no-repeat left bottom fixed;
+  color: #fff;
+  text-align: center;
+}
+
+main {
+  margin: 1em auto;
+  max-width: 1200px;
+  padding: 0 3em;
+  display: flex;
+}
+main > nav {
+  flex: 0 0 auto;
+  width: 200px;
+  padding-right: 1em 0 0;
+}
+main > nav > a {
+  display: block;
+  text-decoration: none;
+  margin: 1em 0;
+  color: #034677;
+}
+main > nav > a:hover {
+  text-decoration: underline;
+}
+main > section {
+  flex: 1 1 auto;
+}
