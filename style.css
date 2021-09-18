@@ -27,17 +27,30 @@ main {
 main > nav {
   flex: 0 0 auto;
   width: 200px;
-  padding-right: 1em 0 0;
+  padding-right: 1em;
 }
 main > nav > a {
   display: block;
   text-decoration: none;
-  margin: 1em 0;
+  margin: 0.5em 0;
+  padding: 0.5em;
   color: #034677;
+  border-radius: 12px;
+}
+main > nav > a.schedule {
+  background-color: #90be92;
 }
 main > nav > a:hover {
   text-decoration: underline;
 }
 main > section {
   flex: 1 1 auto;
+}
+article.testimonial {
+  display: flex;
+  font-size: 1.2em;
+  margin-bottom: 1em;
+}
+article.testimonial > * {
+  margin-right: 1em;
 }
