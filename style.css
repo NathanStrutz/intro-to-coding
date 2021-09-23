@@ -4,7 +4,7 @@ body {
 }
 header {
   padding: 10em 3em;
-  background: url(./3840x2160-code.jpg) #333 no-repeat center center fixed;
+  background: url(./3840x2160-code.jpg) #333 no-repeat 60% center fixed;
   color: #fff;
   text-align: center;
 }
@@ -13,7 +13,7 @@ header h1 {
 }
 footer {
   padding: 4em 3em;
-  background: url(./3840x2160-code.jpg) #333 no-repeat left bottom fixed;
+  background: url(./3840x2160-code.jpg) #333 no-repeat left bottom;
   color: #fff;
   text-align: center;
 }
@@ -23,6 +23,7 @@ main {
   max-width: 1200px;
   padding: 0 3em;
   display: flex;
+  min-height: calc(100vh - 700px - 180px);
 }
 main > nav {
   flex: 0 0 auto;
