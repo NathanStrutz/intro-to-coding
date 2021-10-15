@@ -1,7 +1,9 @@
-body.layout {
+body {
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
+  min-height: 100vh;
+
+  background-color: gray;
 }
 
 main {
@@ -11,10 +13,11 @@ main {
 
 article {
   flex: 1;
+  background-color: white;
 }
 
 nav,
 aside {
-  /* 12em is the width of the columns */
+  /* this is the column width */
   flex: 0 0 12em;
 }
