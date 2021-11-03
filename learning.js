@@ -25,14 +25,3 @@ y = 2;
 {
   let y = 3;
 }
-
-for (let index = 0; index < array.length; index++) {
-    const element = array[index];
-    
-}
-
-for (let index = 0; index < 10; index++) {
-    
-}
-
-
