@@ -1,47 +1,43 @@
 let cl = console.log;
 
-// 1. Create a function that picks Rock, Paper, or Scissors at random
-let getRandomRockPaperScissors = function () {
+let getRPS = function () {
   let rps = ["rock", "paper", "scissors"];
   return rps[Math.floor(Math.random() * rps.length)];
 };
 
-// 2. Create a function that reads user input (or picks a random value)
 let getUserInput = function () {
   let userInput = process.argv[2];
-  return userInput || getRandomRockPaperScissors();
+  return userInput || getRPS();
 };
 
-// 3. Write if statements to find the winner
 let getWinner = function (userInput, computerInput) {
   if (userInput === computerInput) {
     return "tie";
-  } else if (
+  }
+  if (
     (userInput === "rock" && computerInput === "scissors") ||
-    (userInput === "paper" && computerInput === "rock") ||
-    (userInput === "scissors" && computerInput === "paper")
+    (userInput === "scissors" && computerInput === "paper") ||
+    (userInput === "paper" && computerInput === "rock")
   ) {
-    return "user";
+    return "win";
   } else {
-    return "computer";
+    return "lose";
   }
 };
 
-// 4. Congratulate the winner
-let congratulateWinner = function (winner) {
-  if (winner === "user") {
-    cl("You win!");
-  } else if (winner === "computer") {
-    cl("You lose!");
+let congratulate = function (result) {
+  if (result === "tie") {
+    cl("Nobody's a winner");
+  } else if (result === "win") {
+    cl("You are such a winner!");
   } else {
-    cl("It's a tie!");
+    cl("Sorry, not this time!");
   }
 };
 
-// 5. Run the program
 let userInput = getUserInput();
-let computerInput = getRandomRockPaperScissors();
-cl("You chose " + userInput);
-cl("Computer chose " + computerInput);
-let winner = getWinner(userInput, computerInput);
-congratulateWinner(winner);
+let computerInput = getRPS();
+cl("You picked ", userInput);
+cl("Computer picked", computerInput);
+let result = getWinner(userInput, computerInput);
+congratulate(result);
