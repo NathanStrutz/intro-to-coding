@@ -31,21 +31,40 @@ let getSuitColor = function (suit) {
 };
 
 let getRankName = function (rank) {
-  if (rank === 11) {
-    return "Jack";
-  } else if (rank === 12) {
-    return "Queen";
-  } else if (rank === 13) {
-    return "King";
-  } else if (rank === 14) {
-    return "Ace";
-  } else {
-    return rank.toString();
+  switch (rank) {
+    case 11:
+      return "Jack";
+    case 12:
+      return "Queen";
+    case 13:
+      return "King";
+    case 14:
+      return "Ace";
+    default:
+      return rank.toString();
   }
+
+  // if (rank === 11) {
+  //   return "Jack";
+  // } else if (rank === 12) {
+  //   return "Queen";
+  // } else if (rank === 13) {
+  //   return "King";
+  // } else if (rank === 14) {
+  //   return "Ace";
+  // } else {
+  //   return rank.toString();
+  // }
 };
 
-let getCard = function () {};
-let getHand = function () {};
+let dealCard = function () {
+  let index = Math.floor(Math.random() * deck.length);
+  let card = deck.splice(index, 1)[0];
+  return card;
+};
+let dealHand = function () {
+  return [dealCard(), dealCard()];
+};
 
-let deck = createDeck();
+let deck = buildDeck();
 console.table(deck);
