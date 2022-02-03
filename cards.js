@@ -12,8 +12,8 @@ let buildDeck = function () {};
 let createCard = function () {};
 let getSuitColor = function () {};
 let getRankName = function () {};
-let getCard = function () {};
-let getHand = function () {};
+let dealCard = function () {};
+let dealHand = function () {};
 
 let deck = buildDeck();
 console.table(deck);
