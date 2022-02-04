@@ -1,10 +1,10 @@
 let buildDeck = function () {
   let deck = [];
-  for (let i = 2; i < 15; i++) {
-    deck.push(createCard("Hearts", i));
-    deck.push(createCard("Spades", i));
-    deck.push(createCard("Diamonds", i));
-    deck.push(createCard("Clubs", i));
+  for (let rank = 2; rank < 15; rank++) {
+    deck.push(createCard("Hearts", rank));
+    deck.push(createCard("Spades", rank));
+    deck.push(createCard("Diamonds", rank));
+    deck.push(createCard("Clubs", rank));
   }
   return deck;
 };
@@ -14,16 +14,16 @@ let createCard = function (suit, rank) {
   let name = getRankName(rank);
 
   let card = {
-    rank,
-    suit,
-    name,
-    color,
+    rank: rank,
+    suit: suit,
+    name: name,
+    color: color,
   };
   return card;
 };
 
 let getSuitColor = function (suit) {
-  if (suit === "Spades" || suit === "Clubs") {
+  if (suit === "Clubs" || suit === "Spades") {
     return "black";
   } else {
     return "red";
@@ -43,18 +43,6 @@ let getRankName = function (rank) {
     default:
       return rank.toString();
   }
-
-  // if (rank === 11) {
-  //   return "Jack";
-  // } else if (rank === 12) {
-  //   return "Queen";
-  // } else if (rank === 13) {
-  //   return "King";
-  // } else if (rank === 14) {
-  //   return "Ace";
-  // } else {
-  //   return rank.toString();
-  // }
 };
 
 let dealCard = function () {
@@ -63,8 +51,11 @@ let dealCard = function () {
   return card;
 };
 let dealHand = function () {
-  return [dealCard(), dealCard()];
+  return [dealCard(), dealCard(), dealCard(), dealCard(), dealCard()];
 };
 
 let deck = buildDeck();
 console.table(deck);
+
+let hand = dealHand();
+console.table(hand);
