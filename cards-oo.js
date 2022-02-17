@@ -1,4 +1,10 @@
-class DeckBuilder {
+class Deck {
+  cards;
+
+  constructor() {
+    this.cards = this.buildDeck();
+  }
+
   createCard(suit, rank) {
     let color = this.getSuitColor(suit);
     let name = this.getRankName(rank);
@@ -34,7 +40,7 @@ class DeckBuilder {
     }
   }
 
-  createDeck() {
+  buildDeck() {
     let deck = [];
     for (let i = 2; i < 15; i++) {
       deck.push(this.createCard("Hearts", i));
@@ -44,6 +50,12 @@ class DeckBuilder {
     }
     return deck;
   }
+
+  getCard() {
+    let randomCardIndex = Math.random() * this.cards.length;
+    let card = this.cards.splice(randomCardIndex, 1);
+    return card[0];
+  }
 }
 
 class Dealer {
@@ -51,22 +63,43 @@ class Dealer {
     this.getNewDeck();
   }
   getNewDeck() {
-    this.deck = new DeckBuilder().createDeck();
+    this.deck = new Deck();
   }
   getCard() {
-    let randomCardIndex = Math.random() * this.deck.length;
-    let card = this.deck.splice(randomCardIndex, 1);
-    return card[0];
+    return this.deck.getCard();
   }
-  getHand() {
+  getHand(size = 5) {
     let hand = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < size; i++) {
       hand.push(this.getCard());
     }
     return hand;
   }
 }
 
-let dealer = new Dealer();
-let hand = dealer.getHand();
-console.log(hand);
+class Player {
+  name;
+  hand;
+  wins = 0;
+
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+class Game {
+  dealer = new Dealer();
+  players = [
+    new Player("Nathan"),
+    new Player("Alanda"),
+    new Player("Samantha"),
+  ];
+
+  constructor() {
+    this.deal();
+  }
+
+  deal() {
+    this.players.forEach((p) => (p.hand = dealer.getHand()));
+  }
+}
