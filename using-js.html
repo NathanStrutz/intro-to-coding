@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .answerArea {
+        display: none;
+        border: 2px solid blue;
+        padding: 20px;
+        margin: 20px;
+        font-size: 30pt;
+      }
+    </style>
+    <title>Using JavaScript</title>
+  </head>
+  <body>
+    <div>
+      <h1>My web page</h1>
+      <p>Hello, and welcome to my web page. It's so niceof you to visit me here.</p>
+      <p>Do you like fish sticks?</p>
+
+      <button id="yesButton">Yes</button>
+      <button id="noButton">No</button>
+
+      <div class="answerArea" id="yesArea">
+        <p>I like fish sticks too!</p>
+      </div>
+      <div class="answerArea" id="noArea">
+        <p>I don't like fish sticks. I prefer chicken.</p>
+      </div>
+    </div>
+
+    <script>
+      let yesBtn = document.getElementById("yesButton");
+      console.log(yesBtn);
+      yesBtn.addEventListener("click", function () {
+        document.getElementById("yesArea").style.display = "block";
+        document.getElementById("noArea").style.display = "none";
+      });
+
+      let noBtn = document.getElementById("noButton");
+      noBtn.addEventListener("click", function () {
+        document.getElementById("yesArea").style.display = "none";
+        document.getElementById("noArea").style.display = "block";
+      });
+    </script>
+  </body>
+</html>
