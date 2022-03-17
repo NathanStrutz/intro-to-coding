@@ -1,7 +1,6 @@
 // This file was auto-generated. Please do not edit it.
 
-///<reference path="p5.d.ts" />
-
+///<reference path="lib/p5.global-mode.d.ts" />
 
 // Properties from p5
 
@@ -64,7 +63,7 @@ declare function ortho(left: number, right: number, bottom: number, top: number,
 /**
  * Creates an ambient light with a color
  */
-declare function ambientLight(v1: number|any[]|string|p5.Color, v2?: number, v3?: number, a?: number): p5;
+declare function ambientLight(v1: number | any[] | string | p5.Color, v2?: number, v3?: number, a?: number): p5;
 
 // TODO: Fix directionalLight() errors in src/3d/light.js:
 //
@@ -93,17 +92,17 @@ declare function texture(): p5;
 /**
  * Basic material for geometry with a given color
  */
-declare function basicMaterial(v1: number|any[]|string|p5.Color, v2?: number, v3?: number, a?: number): p5;
+declare function basicMaterial(v1: number | any[] | string | p5.Color, v2?: number, v3?: number, a?: number): p5;
 
 /**
  * Ambient material for geometry with a given color
  */
-declare function ambientMaterial(v1: number|any[]|string|p5.Color, v2?: number, v3?: number, a?: number): p5;
+declare function ambientMaterial(v1: number | any[] | string | p5.Color, v2?: number, v3?: number, a?: number): p5;
 
 /**
  * Specular material for geometry with a given color
  */
-declare function specularMaterial(v1: number|any[]|string|p5.Color, v2?: number, v3?: number, a?: number): p5;
+declare function specularMaterial(v1: number | any[] | string | p5.Color, v2?: number, v3?: number, a?: number): p5;
 
 // src/color/creating_reading.js
 
@@ -125,7 +124,7 @@ declare function brightness(color: any): void;
 /**
  * Creates colors for storing in variables of the color datatype.
  */
-declare function color(v1: number|string, v2?: number, v3?: number, alpha?: number): any[];
+declare function color(v1: number | string, v2?: number, v3?: number, alpha?: number): any[];
 
 /**
  * Extracts the green value from a color or pixel array.
@@ -166,7 +165,7 @@ declare function saturation(color: any): void;
  * The background() function sets the color used for the background of the
  * p5.js canvas.
  */
-declare function background(v1: number|string|p5.Color|p5.Image, v2?: number, v3?: number, a?: number): void;
+declare function background(v1: number | string | p5.Color | p5.Image, v2?: number, v3?: number, a?: number): void;
 
 /**
  * Clears the pixels within a buffer.
@@ -186,7 +185,7 @@ declare function clear(): void;
 /**
  * Sets the color used to fill shapes.
  */
-declare function fill(v1: number|any[]|string|p5.Color, v2?: number, v3?: number, a?: number): void;
+declare function fill(v1: number | any[] | string | p5.Color, v2?: number, v3?: number, a?: number): void;
 
 /**
  * Disables filling geometry.
@@ -201,7 +200,7 @@ declare function noStroke(): void;
 /**
  * Sets the color used to draw lines and borders around shapes.
  */
-declare function stroke(v1: number|any[]|string|p5.Color, v2?: number, v3?: number, a?: number): void;
+declare function stroke(v1: number | any[] | string | p5.Color, v2?: number, v3?: number, a?: number): void;
 
 // src/core/2d_primitives.js
 
@@ -228,12 +227,30 @@ declare function point(x: number, y: number): p5;
 /**
  * Draw a quad.
  */
-declare function quad(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x4: number, y4: number): p5;
+declare function quad(
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  x3: number,
+  y3: number,
+  x4: number,
+  y4: number
+): p5;
 
 /**
  * Draws a rectangle to the screen.
  */
-declare function rect(x: number, y: number, w: number, h: number, tl?: number, tr?: number, br?: number, bl?: number): p5;
+declare function rect(
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  tl?: number,
+  tr?: number,
+  br?: number,
+  bl?: number
+): p5;
 
 /**
  * A triangle is a plane created by connecting three points.
@@ -343,7 +360,16 @@ declare function remove(): void;
 /**
  * Draws a cubic Bezier curve on the screen.
  */
-declare function bezier(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x4: number, y4: number): any;
+declare function bezier(
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  x3: number,
+  y3: number,
+  x4: number,
+  y4: number
+): any;
 
 /**
  * Evaluates the Bezier at position t for points a, b, c, d.
@@ -359,7 +385,16 @@ declare function bezierTangent(a: number, b: number, c: number, d: number, t: nu
  * Draws a curved line on the screen between two points, given as the
  * middle four parameters.
  */
-declare function curve(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x4: number, y4: number): any;
+declare function curve(
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  x3: number,
+  y3: number,
+  x4: number,
+  y4: number
+): any;
 
 /**
  * Modifies the quality of forms created with curve() and curveVertex().
@@ -958,7 +993,13 @@ declare function createImage(width: number, height: number): p5.Image;
 /**
  * Capture a sequence of frames that can be used to create a movie.
  */
-declare function saveFrames(filename: string, extension: string, duration: number, framerate: number, callback?: () => any): void;
+declare function saveFrames(
+  filename: string,
+  extension: string,
+  duration: number,
+  framerate: number,
+  callback?: () => any
+): void;
 
 // src/image/loading_displaying.js
 
@@ -972,12 +1013,22 @@ declare function saveFrames(filename: string, extension: string, duration: numbe
 /**
  * Draw an image to the main canvas of the p5js sketch
  */
-declare function image(img: p5.Image, sx?: number, sy?: number, sWidth?: number, sHeight?: number, dx?: number, dy?: number, dWidth?: number, dHeight?: number): void;
+declare function image(
+  img: p5.Image,
+  sx?: number,
+  sy?: number,
+  sWidth?: number,
+  sHeight?: number,
+  dx?: number,
+  dy?: number,
+  dWidth?: number,
+  dHeight?: number
+): void;
 
 /**
  * Sets the fill value for displaying images.
  */
-declare function tint(v1: number|any[], v2?: number|any[], v3?: number|any[], a?: number|any[]): void;
+declare function tint(v1: number | any[], v2?: number | any[], v3?: number | any[], a?: number | any[]): void;
 
 /**
  * Removes the current fill value for displaying images and reverts to
@@ -1015,7 +1066,7 @@ declare function filter(filterType: string, filterParam: number): void;
  * Returns an array of [R,G,B,A] values for any pixel or grabs a section of
  * an image.
  */
-declare function get(x?: number, y?: number, w?: number, h?: number): any[]|p5.Image;
+declare function get(x?: number, y?: number, w?: number, h?: number): any[] | p5.Image;
 
 /**
  * Loads the pixel data for the display window into the pixels[] array.
@@ -1028,7 +1079,7 @@ declare function loadPixels(): void;
  * <p>The x and y parameters specify the pixel to change and the c parameter
  * specifies the color value.
  */
-declare function set(x: number, y: number, c: number|any[]|any): void;
+declare function set(x: number, y: number, c: number | any[] | any): void;
 
 // TODO: Fix updatePixels() errors in src/image/pixels.js:
 //
@@ -1047,7 +1098,12 @@ declare function loadFont(path: string, callback?: () => any): any;
 /**
  * Loads a JSON file from a file or a URL, and returns an Object or Array.
  */
-declare function loadJSON(path: string, callback?: () => any, errorCallback?: () => any, datatype?: string): any|any[];
+declare function loadJSON(
+  path: string,
+  callback?: () => any,
+  errorCallback?: () => any,
+  datatype?: string
+): any | any[];
 
 /**
  * Reads the contents of a file and creates a String array of its individual
@@ -1069,17 +1125,36 @@ declare function loadXML(filename: string, callback?: () => any, errorCallback?:
 /**
  * Method for executing an HTTP GET request.
  */
-declare function httpGet(path: string, data?: any, datatype?: string, callback?: () => any, errorCallback?: () => any): void;
+declare function httpGet(
+  path: string,
+  data?: any,
+  datatype?: string,
+  callback?: () => any,
+  errorCallback?: () => any
+): void;
 
 /**
  * Method for executing an HTTP POST request.
  */
-declare function httpPost(path: string, data?: any, datatype?: string, callback?: () => any, errorCallback?: () => any): void;
+declare function httpPost(
+  path: string,
+  data?: any,
+  datatype?: string,
+  callback?: () => any,
+  errorCallback?: () => any
+): void;
 
 /**
  * Method for executing an HTTP request.
  */
-declare function httpDo(path: string, method?: string, data?: any, datatype?: string, callback?: () => any, errorCallback?: () => any): void;
+declare function httpDo(
+  path: string,
+  method?: string,
+  data?: any,
+  datatype?: string,
+  callback?: () => any,
+  errorCallback?: () => any
+): void;
 
 // TODO: Fix save() errors in src/io/files.js:
 //
@@ -1092,7 +1167,7 @@ declare function httpDo(path: string, method?: string, data?: any, datatype?: st
 /**
  * Writes the contents of an Array or a JSON object to a .json file.
  */
-declare function saveJSON(json: any[]|any, filename: string, optimize?: boolean): void;
+declare function saveJSON(json: any[] | any, filename: string, optimize?: boolean): void;
 
 /**
  * Writes an array of Strings to a text file, one line per String.
@@ -1165,13 +1240,13 @@ declare function map(value: number, start1: number, stop1: number, start2: numbe
  * Determines the largest value in a sequence of numbers, and then returns
  * that value.
  */
-declare function max(n0: number|any[]): number;
+declare function max(n0: number | any[]): number;
 
 /**
  * Determines the smallest value in a sequence of numbers, and then returns
  * that value.
  */
-declare function min(n0: number|any[]): number;
+declare function min(n0: number | any[]): number;
 
 /**
  * Normalizes a number from another range into a value between 0 and 1.
@@ -1307,12 +1382,12 @@ declare function radians(degrees: number): number;
 /**
  * Sets/gets the spacing, in pixels, between lines of text.
  */
-declare function textLeading(leading: number): any|number;
+declare function textLeading(leading: number): any | number;
 
 /**
  * Sets/gets the current font size.
  */
-declare function textSize(theSize: number): any|number;
+declare function textSize(theSize: number): any | number;
 
 // TODO: Fix textStyle() errors in src/typography/attributes.js:
 //
@@ -1335,7 +1410,7 @@ declare function text(str: string, x: number, y: number, x2: number, y2: number)
 /**
  * Sets the current font that will be drawn with the text() function.
  */
-declare function textFont(f: any|string): any;
+declare function textFont(f: any | string): any;
 
 // src/utilities/array_functions.js
 
@@ -1397,45 +1472,45 @@ declare function float(str: string): number;
 /**
  * Converts a boolean, string, or float to its integer representation.
  */
-declare function int(n: string|boolean|number|any[]): number;
+declare function int(n: string | boolean | number | any[]): number;
 
 /**
  * Converts a boolean, string or number to its string representation.
  */
-declare function str(n: string|boolean|number|any[]): string;
+declare function str(n: string | boolean | number | any[]): string;
 
 /**
  * Converts a number or string to its boolean representation.
  */
-declare function boolean(n: string|boolean|number|any[]): boolean;
+declare function boolean(n: string | boolean | number | any[]): boolean;
 
 /**
  * Converts a number, string or boolean to its byte representation.
  */
-declare function byte(n: string|boolean|number|any[]): number;
+declare function byte(n: string | boolean | number | any[]): number;
 
 /**
  * Converts a number or string to its corresponding single-character
  * string representation.
  */
-declare function char(n: string|number|any[]): string;
+declare function char(n: string | number | any[]): string;
 
 /**
  * Converts a single-character string to its corresponding integer
  * representation.
  */
-declare function unchar(n: string|any[]): number;
+declare function unchar(n: string | any[]): number;
 
 /**
  * Converts a number to a string in its equivalent hexadecimal notation.
  */
-declare function hex(n: number|any[]): string;
+declare function hex(n: number | any[]): string;
 
 /**
  * Converts a string representation of a hexadecimal number to its equivalent
  * integer value.
  */
-declare function unhex(n: string|any[]): number;
+declare function unhex(n: string | any[]): number;
 
 // src/utilities/string_functions.js
 
@@ -1462,23 +1537,23 @@ declare function matchAll(str: string, regexp: string): any[];
 /**
  * Utility function for formatting numbers into strings.
  */
-declare function nf(num: number|any[], left?: number, right?: number): string|any[];
+declare function nf(num: number | any[], left?: number, right?: number): string | any[];
 
 /**
  * Utility function for formatting numbers into strings and placing
  * appropriate commas to mark units of 1000.
  */
-declare function nfc(num: number|any[], right?: number): string|any[];
+declare function nfc(num: number | any[], right?: number): string | any[];
 
 /**
  * Utility function for formatting numbers into strings.
  */
-declare function nfp(num: number|any[], left?: number, right?: number): string|any[];
+declare function nfp(num: number | any[], left?: number, right?: number): string | any[];
 
 /**
  * Utility function for formatting numbers into strings.
  */
-declare function nfs(num: number|any[], left?: number, right?: number): string|any[];
+declare function nfs(num: number | any[], left?: number, right?: number): string | any[];
 
 /**
  * The split() function maps to String.split(), it breaks a String into
@@ -1496,7 +1571,7 @@ declare function splitTokens(value: string, delim?: string): any[];
 /**
  * Removes whitespace characters from the beginning and end of a String.
  */
-declare function trim(str?: string|any[]): string|any[];
+declare function trim(str?: string | any[]): string | any[];
 
 // src/utilities/time_date.js
 
@@ -1666,7 +1741,7 @@ declare function removeElements(): void;
 declare function getAudioContext(): any;
 
 /**
- * Returns a number representing the master amplitude (volume) for sound 
+ * Returns a number representing the master amplitude (volume) for sound
  * in this sketch.
  */
 declare function getMasterVolume(): number;
@@ -1675,7 +1750,7 @@ declare function getMasterVolume(): number;
  * <p>Scale the output of all sound in this sketch</p>
  * Scaled between 0.0 (silence) and 1.0 (full volume).
  */
-declare function masterVolume(volume: number|any, rampTime?: number, timeFromNow?: number): void;
+declare function masterVolume(volume: number | any, rampTime?: number, timeFromNow?: number): void;
 
 // TODO: Property "p5.soundOut", defined in lib/addons/p5.sound.js, is not a valid JS symbol name
 
@@ -1697,4 +1772,3 @@ declare function midiToFreq(midiNote: number): number;
 // declare function soundFormats(formats: string|Strings): void;
 
 // TODO: Property "{String} failedPath path to the file that failed to load", defined in lib/addons/p5.sound.js, is not a valid JS symbol name
-
