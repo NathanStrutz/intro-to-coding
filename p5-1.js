@@ -2,12 +2,19 @@
 
 var setup = function () {
   createCanvas(600, 400);
-  background(100);
-  // frameRate(5);
-  // noLoop();
+  frameRate(5);
 };
 
-var draw = function () {};
+var draw = function () {
+  background(100);
+
+  for (let y = 0; y < 50; y++) {
+    for (let x = 0; x < 50; x++) {
+      fill(random(200, 255));
+      square(x * 50, y * 50, 50);
+    }
+  }
+};
 
 // Ideas
 // 1. A circle that draws at mouseX and mouseY.
