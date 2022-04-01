@@ -1,31 +1,31 @@
 ///<reference path="lib/p5.global-mode.d.ts" />
 
-var setup = function () {
-  createCanvas(600, 400);
-};
+// var setup = function () {
+//   createCanvas(600, 400);
+// };
 
 // 6: Shapes that draw themselves
-let shape = {
-  x: 300,
-  y: 200,
-  vx: -7,
-  vy: -6,
-  draw: function () {
-    fill("red");
-    circle((shape.x += shape.vx), (shape.y += shape.vy), 100);
-    if (shape.x < 0 || shape.x > 600) {
-      shape.vx = -shape.vx;
-    }
-    if (shape.y < 0 || shape.y > 400) {
-      shape.vy = -shape.vy;
-    }
-  },
-};
+// let shape = {
+//   x: 300,
+//   y: 200,
+//   vx: -7,
+//   vy: -6,
+//   draw: function () {
+//     fill("red");
+//     circle((this.x += this.vx), (this.y += this.vy), 100);
+//     if (this.x < 0 || this.x > 600) {
+//       this.vx = -this.vx;
+//     }
+//     if (this.y < 0 || this.y > 400) {
+//       this.vy = -this.vy;
+//     }
+//   },
+// };
 
-var draw = function () {
-  background(100);
-  shape.draw();
-};
+// var draw = function () {
+//   background(100);
+//   shape.draw();
+// };
 
 /*
   What about 2 shapes?
@@ -82,42 +82,58 @@ var draw = function () {
 // **
 
 // 8: Hundreds of shapes
-// class Circle {
-//   constructor() {
-//     this.x = random(600);
-//     this.y = random(400);
-//     this.vx = random(-4, 4);
-//     this.vy = random(-4, 4);
-//     this.color = random(255);
-//   }
+class Shape {
+  constructor() {
+    this.x = random(600);
+    this.y = random(400);
+    this.vx = random(-5, 5);
+    this.vy = random(-5, 5);
+    this.color = random(255);
+  }
 
-//   draw() {
-//     fill(this.color);
-//     circle((this.x += this.vx), (this.y += this.vy), 40);
-//     if (this.x < 0 || this.x > 600) {
-//       this.vx = -this.vx;
-//     }
-//     if (this.y < 0 || this.y > 400) {
-//       this.vy = -this.vy;
-//     }
-//   }
-// }
+  draw() {
+    fill(this.color);
+    if (this.x < 0 || this.x > 600) {
+      this.vx = -this.vx;
+    }
+    if (this.y < 0 || this.y > 400) {
+      this.vy = -this.vy;
+    }
+  }
+}
 
-// let shapes = [];
-// var setup = function () {
-//   createCanvas(600, 400);
-//   for (let i = 0; i < 500; i++) {
-//     shapes.push(new Circle());
-//   }
-// };
+class Circle extends Shape {
+  color = [random(255), random(255), random(255)];
 
-// var draw = function () {
-//   background(100);
-//   for (let index = 0; index < shapes.length; index++) {
-//     const shape = shapes[index];
-//     shape.draw();
-//   }
-// };
+  draw() {
+    super.draw();
+    circle((this.x += this.vx), (this.y += this.vy), 40);
+  }
+}
+class Square extends Shape {
+  draw() {
+    super.draw();
+    square((this.x += this.vx), (this.y += this.vy), 40);
+  }
+}
+
+let shapes = [];
+
+var setup = function () {
+  createCanvas(600, 400);
+  for (let i = 0; i < 200; i++) {
+    shapes.push(new Circle());
+    shapes.push(new Square());
+  }
+};
+
+var draw = function () {
+  background(100);
+  for (let index = 0; index < shapes.length; index++) {
+    const shape = shapes[index];
+    shape.draw();
+  }
+};
 
 // **
 // **
