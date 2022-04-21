@@ -10,3 +10,8 @@ var setup = function () {
 var draw = function () {
   game.draw();
 };
+
+var windowResized = function () {
+  resizeCanvas(windowWidth, windowHeight - 4);
+  game = new Pong();
+};

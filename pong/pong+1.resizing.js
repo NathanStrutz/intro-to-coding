@@ -5,8 +5,7 @@ class Pong {
     this.table = new Table();
     this.leftPaddle = new LeftPaddle();
     this.rightPaddle = new RightPaddle();
-    this.score = new Score();
-    this.ball = new Ball(this.leftPaddle, this.rightPaddle, this.score);
+    this.ball = new Ball();
   }
 
   draw() {
@@ -14,7 +13,6 @@ class Pong {
     this.leftPaddle.draw();
     this.rightPaddle.draw();
     this.ball.draw();
-    this.score.draw(this.leftScore, this.rightScore);
   }
 }
 
@@ -57,11 +55,7 @@ class RightPaddle extends Paddle {
   }
 }
 class Ball {
-  constructor(leftPaddle, rightPaddle, score) {
-    this.leftPaddle = leftPaddle;
-    this.rightPaddle = rightPaddle;
-    this.score = score;
-
+  constructor() {
     this.x = random(windowWidth);
     this.y = random(windowHeight);
     this.vx = 6;
@@ -71,14 +65,8 @@ class Ball {
 
   draw() {
     fill(this.color);
-    if (this.x <= 0) {
+    if (this.x < 0 || this.x > windowWidth) {
       this.vx = -this.vx;
-      this.score.rightScore++;
-    }
-
-    if (this.x >= windowWidth) {
-      this.vx = -this.vx;
-      this.score.leftScore++;
     }
     if (this.y < 0 || this.y > windowHeight) {
       this.vy = -this.vy;
@@ -86,20 +74,5 @@ class Ball {
     this.x += this.vx;
     this.y += this.vy;
     square(this.x, this.y, 10);
-  }
-}
-
-class Score {
-  constructor() {
-    this.leftScore = 0;
-    this.rightScore = 0;
-  }
-
-  draw() {
-    fill(180);
-    textSize(32);
-    textAlign("center");
-    text(this.leftScore, windowWidth / 2 - 50, 50);
-    text(this.rightScore, windowWidth / 2 + 50, 50);
   }
 }
