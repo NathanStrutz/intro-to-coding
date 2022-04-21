@@ -102,13 +102,12 @@ class Ball {
 
   draw() {
     fill(this.color);
+    // Collisions with the walls
     if (this.x <= 0) {
       this.vx = -this.vx;
       this.score.rightScore++;
     }
-
-    // Collisions with the walls
-    if (this.x >= windowWidth) {
+    if (this.x + this.size >= windowWidth) {
       this.vx = -this.vx;
       this.score.leftScore++;
     }
