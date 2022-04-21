@@ -30,6 +30,7 @@ class Table {
     }
   }
 }
+
 class Paddle {
   constructor() {
     this.x = 10;
@@ -41,12 +42,30 @@ class Paddle {
     fill(255);
     rect(this.x, this.y, this.width, this.height);
   }
+
+  // I decided to put these in the left & right paddle classes
+  // so that they can have slightly different functionality
+  //
+  isCollidingWith(ball) {
+    return false;
+  }
 }
+
 class LeftPaddle extends Paddle {
   x = 40;
   draw() {
     this.y = mouseY;
     super.draw();
+  }
+  isCollidingWith(ball) {
+    if (ball.x < this.x + this.width && ball.y + ball.size >= this.y && ball.y <= this.y + this.height) {
+      // Allow the ball to pass through if it's going backwards
+      if (ball.vx > 0) {
+        return false;
+      } else {
+        return true;
+      }
+    }
   }
 }
 class RightPaddle extends Paddle {
@@ -55,7 +74,18 @@ class RightPaddle extends Paddle {
     this.y = mouseY;
     super.draw();
   }
+  isCollidingWith(ball) {
+    if (ball.x + ball.size > this.x && ball.y + ball.size >= this.y && ball.y <= this.y + this.height) {
+      // Allow the ball to pass through if it's going backwards
+      if (ball.vx < 0) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
 }
+
 class Ball {
   constructor(leftPaddle, rightPaddle, score) {
     this.leftPaddle = leftPaddle;
@@ -66,6 +96,7 @@ class Ball {
     this.y = random(windowHeight);
     this.vx = 6;
     this.vy = 4;
+    this.size = 10;
     this.color = 255;
   }
 
@@ -76,6 +107,7 @@ class Ball {
       this.score.rightScore++;
     }
 
+    // Collisions with the walls
     if (this.x >= windowWidth) {
       this.vx = -this.vx;
       this.score.leftScore++;
@@ -83,9 +115,16 @@ class Ball {
     if (this.y < 0 || this.y > windowHeight) {
       this.vy = -this.vy;
     }
+
+    // Collisions with the paddles
+    if (this.leftPaddle.isCollidingWith(this) || this.rightPaddle.isCollidingWith(this)) {
+      console.log("Collision");
+      this.vx = -this.vx;
+    }
+
     this.x += this.vx;
     this.y += this.vy;
-    square(this.x, this.y, 10);
+    square(this.x, this.y, this.size);
   }
 }
 
