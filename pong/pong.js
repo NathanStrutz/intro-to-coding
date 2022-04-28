@@ -199,6 +199,7 @@ class Ball {
 
   draw() {
     fill(this.color);
+    // Collisions with the walls
     if (this.x <= 0) {
       this.vx = -this.vx;
       this.fireRightPointScored();
