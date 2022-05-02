@@ -135,14 +135,17 @@ class LeftPaddle extends Paddle {
     super.draw();
   }
   isCollidingWith(ball) {
-    if (ball.x < this.x + this.width && ball.y + ball.size >= this.y && ball.y <= this.y + this.height) {
-      // Allow the ball to pass through if it's going backwards
-      if (ball.vx > 0) {
-        return false;
-      } else {
-        this.registerCollision();
-        return true;
-      }
+    if (
+      ball.x <= this.x + this.width &&
+      ball.x + ball.size >= this.x &&
+      ball.y + ball.size >= this.y &&
+      ball.y <= this.y + this.height &&
+      ball.vx < 0 // Allow the ball to pass through if it's going backwards
+    ) {
+      this.registerCollision();
+      return true;
+    } else {
+      return false;
     }
   }
 }
@@ -153,14 +156,17 @@ class RightPaddle extends Paddle {
     super.draw();
   }
   isCollidingWith(ball) {
-    if (ball.x + ball.size > this.x && ball.y + ball.size >= this.y && ball.y <= this.y + this.height) {
-      // Allow the ball to pass through if it's going backwards
-      if (ball.vx < 0) {
-        return false;
-      } else {
-        this.registerCollision();
-        return true;
-      }
+    if (
+      ball.x + ball.size >= this.x &&
+      ball.x <= this.x + this.height &&
+      ball.y + ball.size >= this.y &&
+      ball.y <= this.y + this.height &&
+      ball.vx > 0 // Allow the ball to pass through if it's going backwards
+    ) {
+      this.registerCollision();
+      return true;
+    } else {
+      return false;
     }
   }
 }
