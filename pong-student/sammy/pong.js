@@ -1,4 +1,4 @@
-///<reference path="p5.global-mode.d.ts" />
+///<reference path="../../lib/p5.global-mode.d.ts" />
 
 let shapes = [];
 let game;
@@ -79,20 +79,12 @@ class Shape {
       shapes.push(new PlayerTwo());
       shapes.push(new Ball());
     }
-    if (
-      this.isCircleInside(p1XPos, p1YPos, 30, rectSize) ||
-      this.isCircleInside(p2XPos, p2YPos, 30, rectSize)
-    ) {
+    if (this.isCircleInside(p1XPos, p1YPos, 30, rectSize) || this.isCircleInside(p2XPos, p2YPos, 30, rectSize)) {
       this.vx = -this.vx;
     }
   }
   isCircleInside(x, y, w, h) {
-    if (
-      this.x > x &&
-      this.x < x + w &&
-      this.y + 15 > y &&
-      this.y + 15 < y + h
-    ) {
+    if (this.x > x && this.x < x + w && this.y + 15 > y && this.y + 15 < y + h) {
       return true;
     } else {
       return false;
