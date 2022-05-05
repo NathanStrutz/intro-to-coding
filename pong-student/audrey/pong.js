@@ -5,7 +5,7 @@ class Pong {
     this.table = new Table();
     this.leftPaddle = new LeftPaddle();
     this.rightPaddle = new RightPaddle();
-    this.ball = new Ball();
+    this.ball = new Ball(this.leftPaddle, this.rightPaddle);
   }
 
   draw() {
@@ -51,7 +51,7 @@ class LeftPaddle extends Paddle {
       if (ball.vx < 0) {
         return false;
       } else {
-        this.registerCollision();
+        // this.registerCollision();
         return true;
       }
     }
@@ -76,12 +76,15 @@ class RightPaddle extends Paddle {
   }
 }
 class Ball {
-  constructor() {
+  constructor(leftPaddle, rightPaddle) {
+    this.leftPaddle = leftPaddle;
+    this.rightPaddle = rightPaddle;
     this.x = random(windowWidth);
     this.y = random(windowHeight);
     this.vx = 7;
     this.vy = 6;
     this.color = 1;
+    this.size = 20;
   }
 
   draw() {
