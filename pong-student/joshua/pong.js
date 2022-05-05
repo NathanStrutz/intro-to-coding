@@ -1,4 +1,4 @@
-///<reference path="../lib/p5.global-mode.d.ts" />
+///<reference path="../../lib/p5.global-mode.d.ts" />
 
 let paddleH = 100;
 let paddleW = 10;
@@ -31,8 +31,8 @@ class Pong {
   }
 }
 class Table {
-  constructor(){
-    this.hslHistory = []
+  constructor() {
+    this.hslHistory = [];
   }
   draw() {
     background("Black");
@@ -42,25 +42,27 @@ class Table {
       rect(midPoint - 5, y, 10, 20);
       y += 40;
     }
-    colorMode(HSL)
-    noStroke()
+    colorMode(HSL);
+    noStroke();
     this.hslHistory.push(frameCount % 360);
 
-if (this.hslHistory.length > 560) {
-  this.hslHistory.splice(0, 1);
-}
+    if (this.hslHistory.length > 560) {
+      this.hslHistory.splice(0, 1);
+    }
 
     for (let i = 0; i < windowWidth; i++) {
-      let h = (frameCount % 360) +i;
-      if (h > 360){h = (h % 360)}
-      fill(h, 100, 50, 1)
-      
-      let offset = 2
+      let h = (frameCount % 360) + i;
+      if (h > 360) {
+        h = h % 360;
+      }
+      fill(h, 100, 50, 1);
 
-      square(i+offset, 0, offset)
-      square(i+offset, windowHeight-offset, offset)
-      square(0, i+offset, offset)
-      square(windowWidth-offset, i+offset, offset)
+      let offset = 2;
+
+      square(i + offset, 0, offset);
+      square(i + offset, windowHeight - offset, offset);
+      square(0, i + offset, offset);
+      square(windowWidth - offset, i + offset, offset);
     }
   }
 }
@@ -87,7 +89,7 @@ class Paddle {
   draw() {
     colorMode(HSL);
     fill("black");
-    stroke((frameCount*2 % 360), 100, 50)
+    stroke((frameCount * 2) % 360, 100, 50);
     rect(this.x, this.y, this.width, this.height);
   }
 }
@@ -116,8 +118,8 @@ class Ball {
       (this.vx = a * 6),
       (this.vy = a * 4),
       (this.color = "white");
-      this.history = [];
-      this.hslHistory = [];
+    this.history = [];
+    this.hslHistory = [];
   }
   draw() {
     fill(this.color);
@@ -138,10 +140,10 @@ class Ball {
     if (this.x < 0) {
       this.x = windowWidth / 2;
       scoreR++;
-     if (this.vx >= -10) {
-      this.vx-=2
-      this.vy-=2
-     }
+      if (this.vx >= -10) {
+        this.vx -= 2;
+        this.vy -= 2;
+      }
     }
     if (scoreR >= 10) {
       message = "  You win!";
@@ -151,35 +153,35 @@ class Ball {
     if (this.x > windowWidth) {
       this.x = windowWidth / 2;
       scoreL++;
-      if(this.vx <= 10) {
-        this.vx+=2
-        this.vy+=2
+      if (this.vx <= 10) {
+        this.vx += 2;
+        this.vy += 2;
       }
     }
-      if (scoreL >= 10) {
-        message = "You Lose!"
-        this.vx = 0
-        this.vy = 0
-      } 
-      noStroke();
-      colorMode(HSL);
+    if (scoreL >= 10) {
+      message = "You Lose!";
+      this.vx = 0;
+      this.vy = 0;
+    }
+    noStroke();
+    colorMode(HSL);
 
-      var v = createVector(this.x,this.y);
-      this.history.push(v);
-      this.hslHistory.push(frameCount % 360);
+    var v = createVector(this.x, this.y);
+    this.history.push(v);
+    this.hslHistory.push(frameCount % 360);
 
-      if(this.history.length > 80) {
-        this.history.splice(0, 1);
-        this.hslHistory.splice(0, 1);
-      }
+    if (this.history.length > 80) {
+      this.history.splice(0, 1);
+      this.hslHistory.splice(0, 1);
+    }
 
-      for (let i = 0; i < this.history.length; i++) {
-        const pos = this.history[i];
-        const h = this.hslHistory[i];
+    for (let i = 0; i < this.history.length; i++) {
+      const pos = this.history[i];
+      const h = this.hslHistory[i];
 
-        fill(h, 100, 50, i*0.01);
-        square(pos.x, pos.y, 10);
-      }
+      fill(h, 100, 50, i * 0.01);
+      square(pos.x, pos.y, 10);
+    }
 
     square(this.x, this.y, 10);
     this.x += this.vx;

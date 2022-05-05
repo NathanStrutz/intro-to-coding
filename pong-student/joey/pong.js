@@ -6,11 +6,11 @@ class Pong {
     this.leftPaddle = new LeftPaddle();
     this.rightPaddle = new RightPaddle();
     this.score = new Score();
-    this.ball = new Ball(this.leftPaddle, this.rightPaddle, this.score);
     this.createNewBall();
   }
   createNewBall() {
-    this.ball = new Ball(this.leftPaddle, this.rightPaddle);
+    this.ball = new Ball(this.leftPaddle, this.rightPaddle, this.score);
+    this.ball.registerPointHandler(this.score);
   }
   draw() {
     this.table.draw();
@@ -31,6 +31,12 @@ class Score {
     textAlign("center");
     text(this.leftScore, windowWidth / 2 - 50, 50);
     text(this.rightScore, windowWidth / 2 + 50, 50);
+  }
+  leftPointScored() {
+    this.leftScore++;
+  }
+  rightPointScored() {
+    this.rightScore++;
   }
 }
 
@@ -58,15 +64,16 @@ class Paddle {
     rect(this.x, this.y, this.width, this.height);
   }
 }
+
 class LeftPaddle extends Paddle {
-  x = windowWidth - 1510;
+  x = 40;
   draw() {
     this.y = mouseY;
     super.draw();
   }
   isCollidingWith(ball) {
-    if (ball.x + ball.size > this.x && ball.y + ball.size >= this.y && ball.y <= this.y + th)
-      if (ball.vx < 0) {
+    if (ball.x < this.x + this.width && ball.y + 10 >= this.y && ball.y <= this.y + this.height)
+      if (ball.vx > 0) {
         return false;
       } else {
         return true;
@@ -80,20 +87,16 @@ class RightPaddle extends Paddle {
     super.draw();
   }
   isCollidingWith(ball) {
-    if (ball.x + ball.size > this.x && ball.y + ball.size >= this.y && ball.y <= this.y + this.height) {
+    if (ball.x + 10 > this.x && ball.y + 10 >= this.y && ball.y <= this.y + this.height) {
       if (ball.vx < 0) {
-        console.log("right passthrough");
         return false;
       } else {
-        console.log("right collision");
-        // this.registerCollision();
         return true;
       }
-    } else {
-      console.log("right nothing");
     }
   }
 }
+
 class Ball {
   constructor(leftPaddle, rightPaddle) {
     this.leftPaddle = leftPaddle;
@@ -105,32 +108,47 @@ class Ball {
     this.color = "#FD6A02";
   }
   pointHandlers = [];
+  /**
+   * Register an object to listen in on point scored events
+   * @param {leftPointScored: Function, rightPointScored: Function} handler Object with leftPointScored and rightPointScored methods
+   */
   registerPointHandler(handler) {
     this.pointHandlers.push(handler);
   }
   fireLeftPointScored() {
-    if (this.x + this.size >= windowWidth) {
-      this.vx = this.vx;
-      this.fireLeftPointScored();
+    for (let handler of this.pointHandlers) {
+      handler.leftPointScored();
     }
-    if (this.y < 0 || this.y + this.size > windowHeight) {
-      this.vy = -this.vy;
+  }
+  fireRightPointScored() {
+    for (let handler of this.pointHandlers) {
+      handler.rightPointScored();
     }
-    if (this.leftPaddle.isColldingWith(this) || this.rightPaddle.isColldingWith(this)) {
+  }
+
+  draw() {
+    // Paddle collisions
+    if (this.leftPaddle.isCollidingWith(this) || this.rightPaddle.isCollidingWith(this)) {
       this.vx = -this.vx * 1.1;
     }
-    this.x += this.vx;
-    this.y += this.vy;
-    square(this.x, this.y, this.size);
-  }
-  draw() {
-    fill(this.color);
-    if (this.x < 0 || this.x > windowWidth) {
+
+    // Bounce off the right wall
+    if (this.x + 10 >= windowWidth && this.vx > 0) {
       this.vx = -this.vx;
+      this.fireLeftPointScored();
     }
+    // Bounce off the left wall
+    if (this.x <= 0 && this.vx < 0) {
+      this.vx = -this.vx;
+      this.fireRightPointScored();
+    }
+
+    // Bounce off the top & bottom wall
     if (this.y < 0 || this.y > windowHeight) {
       this.vy = -this.vy;
     }
+
+    fill(this.color);
     this.x += this.vx;
     this.y += this.vy;
     square(this.x, this.y, 10);

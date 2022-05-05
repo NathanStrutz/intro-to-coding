@@ -1,4 +1,4 @@
-///<reference path="../lib/p5.global-mode.d.ts" />
+///<reference path="../../lib/p5.global-mode.d.ts" />
 
 let paddleH = 100;
 let paddleW = 10;

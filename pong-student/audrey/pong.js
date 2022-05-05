@@ -5,8 +5,9 @@ class Pong {
     this.table = new Table();
     this.leftPaddle = new LeftPaddle();
     this.rightPaddle = new RightPaddle();
-    this.ball = new Ball();
+    this.ball = new Ball(this.leftPaddle, this.rightPaddle);
   }
+
   draw() {
     this.table.draw();
     this.leftPaddle.draw();
@@ -17,7 +18,7 @@ class Pong {
 
 class Table {
   draw() {
-    background("black");
+    background("pink");
 
     let midPoint = windowWidth / 2;
     for (let y = 0; y < windowHeight; y++) {
@@ -35,31 +36,57 @@ class Paddle {
     this.height = 100;
   }
   draw() {
-    fill(255);
+    fill(1);
     rect(this.x, this.y, this.width, this.height);
   }
 }
 class LeftPaddle extends Paddle {
   x = 40;
   draw() {
+    this.y = mouseY;
     super.draw();
   }
+  isCollidingWith(ball) {
+    if (ball.x + ball.size > this.x && ball.y + ball.size >= this.y && ball.y <= this.y + this.height) {
+      if (ball.vx < 0) {
+        return false;
+      } else {
+        // this.registerCollision();
+        return true;
+      }
+    }
+  }
 }
+
 class RightPaddle extends Paddle {
   x = windowWidth - 50;
   draw() {
     this.y = mouseY;
     super.draw();
   }
+  isCollidingWith(ball) {
+    if (ball.x + ball.size > this.x && ball.y + ball.size >= this.y && ball.y <= this.y + this.height) {
+      if (ball.vx < 0) {
+        return false;
+      } else {
+        this.registerCollision();
+        return true;
+      }
+    }
+  }
 }
 class Ball {
-  constructor() {
+  constructor(leftPaddle, rightPaddle) {
+    this.leftPaddle = leftPaddle;
+    this.rightPaddle = rightPaddle;
     this.x = random(windowWidth);
     this.y = random(windowHeight);
-    this.vx = 6;
-    this.vy = 4;
-    this.color = 255;
+    this.vx = 7;
+    this.vy = 6;
+    this.color = 1;
+    this.size = 20;
   }
+
   draw() {
     fill(this.color);
     if (this.x < 0 || this.x > windowWidth) {
@@ -70,6 +97,11 @@ class Ball {
     }
     this.x += this.vx;
     this.y += this.vy;
-    square(this.x, this.y, 10);
+    circle(this.x, this.y, 20, 20, 20);
+
+    if (this.leftPaddle.isCollidingWith(this) || this.rightPaddle.isCollidingWith(this)) {
+      console.log("Collision");
+      this.vx = this.vx;
+    }
   }
 }
