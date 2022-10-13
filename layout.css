@@ -20,7 +20,7 @@ aside {
 }
 
 /* Add Colors and spacing to make it look like the picture */
-body {
+/* body {
   padding: 0;
   margin: 0;
 }
@@ -30,8 +30,9 @@ article,
 aside,
 footer {
   padding: 5px;
-}
-header {
+} */
+
+/* header {
   background-color: #ff8200;
 }
 nav {
@@ -45,4 +46,42 @@ aside {
 }
 footer {
   background-color: #f48d76;
+} */
+
+/* Let's make it look non-hiddeous */
+/* body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+header {
+  background-color: #c8d5d8;
+  color: #00323d;
+  padding-left: 3rem;
+}
+nav {
+  background-color: #bac0c2;
+  padding: 2rem 0 0;
+}
+nav li {
+  list-style: none;
+  padding: 0 0 1rem 0;
+}
+article {
+  padding: 3rem;
+  background-color: #f8f8f8;
+}
+aside {
+  padding: 3rem 1rem;
+  background-color: #9abbc3;
+}
+footer {
+  background-color: #30474d;
+  color: #fff;
+}
+
+a,
+a:visited {
+  color: #114755;
+}
+a:hover {
+  color: #1f7a91;
+} */
