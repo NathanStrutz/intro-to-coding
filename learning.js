@@ -6,7 +6,7 @@ console.log("Nathan " + "Strutz");
 console.log("123-555-1234");
 console.log(123 - 555 - 1234);
 
-// 10
+// 10 Trees
 let cl = console.log;
 {
   let branches = "#";
