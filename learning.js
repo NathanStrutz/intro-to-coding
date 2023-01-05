@@ -8,7 +8,7 @@ console.log(123 - 555 - 1234);
 
 // 10 Trees
 let cl = console.log;
-{
+let tree = function () {
   // half tree
   let branches = "#";
   for (let index = 0; index < 7; index++) {
@@ -16,9 +16,10 @@ let cl = console.log;
     branches += "#";
   }
   cl("#");
-}
-{
+};
+let fullTree = function () {
   // full tree
+  console.log("");
   let branches = "#";
   let leftSpace = " ".repeat(6);
   for (let index = 0; index < 5; index++) {
@@ -27,7 +28,7 @@ let cl = console.log;
     leftSpace = " ".repeat(5 - index);
   }
   cl("     ##");
-}
+};
 cl("");
 
 // 11 Loops and functions
@@ -42,7 +43,20 @@ let christmasTree = function (height) {
 christmasTree(7);
 christmasTree(75);
 
-// Math functions
+// 12 FizzBuzz
+for (let i = 1; i <= 100; i++) {
+  if (i % 15 === 0) {
+    cl("FizzBuzz");
+  } else if (i % 3 === 0) {
+    cl("Fizz");
+  } else if (i % 5 === 0) {
+    cl("Buzz");
+  } else {
+    cl(i);
+  }
+}
+
+// 12 Math functions
 let add = function (a, b) {
   return a + b;
 };
