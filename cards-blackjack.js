@@ -80,12 +80,15 @@ let gameLoop = function (players) {
 
   let winner = getWinner(players);
   cl("Congratulations to the winner,", winner.name);
+  ct(players.map((p) => ({ name: p.name, points: p.points })));
 };
+
 let gameTurn = function (player, deck) {
   while (player.points < 16) {
     hitMe(player, deck);
   }
 };
+
 let countPoints = function (hand) {
   let total = hand.reduce((total, card) => {
     let cardPoints = 0;
@@ -109,31 +112,37 @@ let countPoints = function (hand) {
     return total + cardPoints;
   }, 0);
   if (total > 21 && hand.find((card) => card.rank === 14)) {
+    // Set an Ace as a 1 instead of an 11
     hand.find((card) => card.rank === 14).rank = 1;
     return countPoints(hand);
   } else {
     return total;
   }
 };
+
 let hitMe = function (player, deck) {
   player.hand.push(dealCard(deck));
   player.points = countPoints(player.hand);
 };
+
 let getWinner = function (players) {
+  let bustPlayer = createPlayer("nobody - everyone went BUST!");
+  bustPlayer.points = 0;
+
   return players.reduce((winner, player, i) => {
-    if (i === 0) return player; // the 1st player starts as the "winner" as a placeholder
-    if (player.points > winner.points) {
+    // if (i === 0) return player; // the 1st player starts as the "winner" as a placeholder
+    if (player.points > winner.points && player.points <= 21) {
       return player;
-    } else if (winner.points === player.points) {
-      let tiePlayer = createPlayer(
-        `It's a tie between ${player.name} and ${winner.name} who each had ${playerPoints} points`
-      );
+    } else if (winner.points > player.points || player.points > 21) {
+      return winner;
+    } else if (winner.points === player.points && player.points <= 21) {
+      let tiePlayer = createPlayer(`It's a tie between ${player.name} and ${winner.name}!`);
       tiePlayer.hand = player.hand;
       return tiePlayer;
     } else {
-      return winner;
+      return bustPlayer;
     }
-  }, players[0]);
+  }, bustPlayer);
 };
 
 gameLoop([createPlayer("Nathan"), createPlayer("Alanda")]);
