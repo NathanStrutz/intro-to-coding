@@ -38,15 +38,15 @@ class Card {
   constructor(rank, suit) {
     this.rank = rank;
     this.suit = suit;
-    this.color = this.getColor(suit);
-    this.name = this.getName(rank);
-    this.shortName = this.getShortName(this.getName(rank));
-    this.symbol = this.getSymbol(suit);
+    this.color = this.getColor();
+    this.name = this.getName();
+    this.shortName = this.getShortName();
+    this.symbol = this.getSymbol();
   }
 
   // Get the card's name based on its rank
-  getName(rank) {
-    switch (rank) {
+  getName() {
+    switch (this.rank) {
       case 11:
         return "Jack";
       case 12:
@@ -56,27 +56,27 @@ class Card {
       case 14:
         return "Ace";
       default:
-        return rank + "";
+        return this.rank + "";
     }
   }
   // Get the card's 1-2 character short name
-  getShortName(longName) {
-    if (longName === "10") {
+  getShortName() {
+    if (this.name === "10") {
       return "10";
     } else {
-      return longName[0];
+      return this.name[0];
     }
   }
   // Get the card's color based on its suit
-  getColor(suit) {
-    if (suit === "Clubs" || suit === "Spades") {
+  getColor() {
+    if (this.suit === "Clubs" || this.suit === "Spades") {
       return "black";
     } else {
       return "red";
     }
   }
-  getSymbol(suit) {
-    switch (suit) {
+  getSymbol() {
+    switch (this.suit) {
       case "Hearts":
         return "♥";
       case "Spades":
