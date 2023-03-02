@@ -98,7 +98,7 @@ let gameLoop = function (players) {
   };
 
   // start at the end so player #1 is the actual starter
-  let currentPlayer = players.at(-1);
+  let currentPlayer = players[players.length - 1];
 
   let maxTurns = 1000;
 
@@ -133,7 +133,7 @@ let gameLoop = function (players) {
  * @param {Array<card>} discardPile Check the first card to see if you have a match to also discard
  */
 let gameTurn = function (player, drawPile, discardPile) {
-  let topCard = discardPile.at(-1);
+  let topCard = discardPile[discardPile.length - 1];
   // first, search for rank matches
   let rankMatch = player.hand.findIndex((card) => card.rank === topCard.rank);
   if (rankMatch >= 0) {

@@ -13,7 +13,7 @@ let prompt = require("prompt-sync")({ sigint: true });
     if (nextDayIndex > days.length - 1) {
       nextDayIndex = 0;
     }
-    cl("the following day will be " + days.at(nextDayIndex));
+    cl("the following day will be " + days[days.length - 1]);
   } else {
     cl('This program requires you to type a full day, by its name, e.g. "Monday" ');
   }
