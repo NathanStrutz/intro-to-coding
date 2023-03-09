@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>jQuery example</title>
+    <style>
+      #answerYes,
+      #answerNo {
+        display: none;
+        padding: 20px;
+      }
+      #answerYes {
+        border: 10px solid green;
+      }
+      #answerNo {
+        border: 10px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Do you like fish sticks?</h2>
+
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+
+    <p id="answerYes">Yeah, me too.</p>
+    <p id="answerNo">Oh, what's wrong with you?</p>
+
+    <script src="../lib/jquery.js"></script>
+    <script>
+      $("#yes").click(function () {
+        $("#answerYes").show();
+        $("#answerNo").hide();
+      });
+      $("#no").click(function () {
+        $("#answerNo").show();
+        $("#answerYes").hide();
+      });
+    </script>
+  </body>
+</html>
