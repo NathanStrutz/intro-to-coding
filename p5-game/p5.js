@@ -5,6 +5,8 @@ class Game {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
     this.background = "#bbf";
+    this.targetColumns = 6; // across
+    this.targetRows = 6; // down
   }
 }
 
@@ -91,15 +93,11 @@ var setup = function () {
   ball = new Ball();
   paddle = new Paddle();
 
-  let rows = 6;
-  let cols = 6;
-  this.gap = 5;
-  let targetWidth = game.width / cols - this.gap;
-  for (let i = 0; i < rows * cols; i++) {
-    let column = targetWidth % cols;
-    let x = i * column + column * gap;
-    let y = (i % rows) * 25;
-    targets.push(new Target(x, y, targetWidth, 10));
+  let colWidth = game.width - 10 / game.targetColumns;
+  for (let i = 0; i < game.targetRows * game.targetColumns; i++) {
+    let x = (i % game.targetColumns) * colWidth;
+    let y = (game.targetRows % i) * 20;
+    targets.push(new Target(x + 10, y, colWidth, 10));
   }
 };
 
