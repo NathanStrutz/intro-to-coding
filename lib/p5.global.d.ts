@@ -1,5 +1,11 @@
 // Global mode type definitions for p5
 
+/* Reference me like this:
+---------------------------------------------
+///<reference path="lib/p5.global.d.ts" />
+---------------------------------------------
+*/
+
 // This file was auto-generated. Please do not edit it.
 
 /// <reference path="./lib/addons/p5.sound.d.ts" />
