@@ -2,9 +2,9 @@
 
 class Game {
   constructor() {
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
-    this.background = "#bbf";
+    this.width = 1000;
+    this.height = 563;
+    this.background = "#CCC";
     this.targetColumns = 6; // across
     this.targetRows = 6; // down
   }
@@ -16,7 +16,7 @@ class Ball {
     this.y = game.height - 50;
     this.vx = 2;
     this.vy = -2;
-    this.size = 10;
+    this.size = 20;
   }
   speedUp() {
     this.vx = this.vx * 1.2;
@@ -24,7 +24,8 @@ class Ball {
   }
   draw() {
     noStroke();
-    square(this.x, this.y, 10);
+    fill("#F00");
+    square(this.x, this.y, this.size);
     this.x += this.vx;
     this.y += this.vy;
 
@@ -50,7 +51,21 @@ class Ball {
       this.vy = -this.vy;
     }
   }
-  checkTargetCollision() {}
+  checkTargetCollision() {
+    for (let i in targets) {
+      let target = targets[i];
+
+      if (
+        this.x + this.size >= target.x &&
+        this.x <= target.x + target.w &&
+        this.y + this.size >= target.y &&
+        this.y <= target.y + target.h
+      ) {
+        this.vy = -this.vy;
+        targets.splice(i, 1);
+      }
+    }
+  }
 }
 
 class Paddle {
@@ -61,23 +76,28 @@ class Paddle {
     this.y = game.height - this.height - 10;
   }
   draw() {
+    fill(255);
     rect(this.x, this.y, this.width, this.height);
     this.x = mouseX - this.width / 2;
   }
 }
 
 class Target {
-  constructor(x, y, w, h) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.color = [this.x * this.y, 40, 40];
-    console.log("new Target", this.x, this.y, this.color);
+  constructor(xNumber, yNumber) {
+    this.xNumber = xNumber;
+    this.yNumber = yNumber;
+
+    this.color = [(255 / game.targetColumns) * xNumber, (255 / game.targetRows) * yNumber, 100];
+
+    this.x = (game.width / game.targetColumns) * xNumber;
+    this.y = (200 / game.targetRows) * yNumber;
+
+    this.w = game.width / game.targetColumns;
+    this.h = 24;
   }
   draw() {
-    color(this.color);
-    stroke("green");
+    fill(this.color);
+    noStroke();
     rect(this.x, this.y, this.w, this.h);
   }
 }
@@ -93,16 +113,15 @@ var setup = function () {
   ball = new Ball();
   paddle = new Paddle();
 
-  let colWidth = game.width - 10 / game.targetColumns;
-  for (let i = 0; i < game.targetRows * game.targetColumns; i++) {
-    let x = (i % game.targetColumns) * colWidth;
-    let y = (game.targetRows % i) * 20;
-    targets.push(new Target(x + 10, y, colWidth, 10));
+  for (let row = 0; row < game.targetRows; row++) {
+    for (let col = 0; col < game.targetColumns; col++) {
+      targets.push(new Target(col, row));
+    }
   }
 };
 
 var draw = function () {
-  background("#bbf");
+  background(game.background);
   ball.draw();
   paddle.draw();
   for (let i = 0; i < targets.length; i++) {
