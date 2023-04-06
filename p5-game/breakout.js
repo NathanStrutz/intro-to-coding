@@ -7,6 +7,45 @@ class Game {
     this.background = "#CCC";
     this.targetColumns = 6; // across
     this.targetRows = 6; // down
+    this.lives = 3;
+    this.points = 0;
+  }
+  draw() {
+    if (this.lives < 0) {
+      return this.youLose();
+    }
+
+    textAlign(LEFT);
+    textSize(20);
+    fill("red");
+    stroke(255);
+    strokeWeight(2);
+    text(`${this.lives} lives left`, 10, this.height - 30, this.width);
+
+    textAlign(RIGHT);
+    textSize(20);
+    fill("blue");
+    stroke(255);
+    strokeWeight(2);
+    text(`${this.points} Points`, 0, this.height - 30, this.width - 10);
+  }
+  youLose() {
+    noLoop();
+    stroke("black");
+    strokeWeight(50);
+    fill("red");
+    textSize(100);
+    textAlign(CENTER);
+    text("You Lost!", 0, game.height / 2, game.width);
+  }
+  youWin() {
+    noLoop();
+    stroke("black");
+    strokeWeight(50);
+    fill("white");
+    textSize(100);
+    textAlign(CENTER);
+    text("You Won!", 0, game.height / 2, game.width);
   }
 }
 
@@ -19,8 +58,10 @@ class Ball {
     this.size = 20;
   }
   speedUp() {
-    this.vx = this.vx * 1.2;
-    this.vy = this.vy * 1.2;
+    if (abs(this.vx) < 12 && abs(this.vy) < 12) {
+      this.vx = this.vx * 1.13;
+      this.vy = this.vy * 1.13;
+    }
   }
   draw() {
     noStroke();
@@ -39,6 +80,9 @@ class Ball {
     }
     if (this.y <= 0 || this.y + this.size >= game.height) {
       this.vy = -this.vy;
+    }
+    if (this.y + this.size > game.height) {
+      game.lives--;
     }
   }
   checkPaddleCollision() {
@@ -63,6 +107,8 @@ class Ball {
       ) {
         this.vy = -this.vy;
         targets.splice(i, 1);
+        this.speedUp();
+        game.points += 25;
       }
     }
   }
@@ -73,7 +119,7 @@ class Paddle {
     this.width = 150;
     this.height = 10;
     this.x = mouseX;
-    this.y = game.height - this.height - 10;
+    this.y = game.height - this.height - 50;
   }
   draw() {
     fill(255);
@@ -128,7 +174,12 @@ var draw = function () {
     const target = targets[i];
     target.draw();
   }
+  if (targets.length === 0) {
+    game.youWin();
+  }
+  game.draw();
 };
+
 var mouseClicked = function () {
   ball.speedUp();
 };
