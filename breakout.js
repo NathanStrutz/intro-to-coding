@@ -23,9 +23,9 @@ class Ball {
     this.x += this.vx;
     this.y += this.vy;
 
-    collideWithWalls();
-    collideWithPaddle();
-    collideWithTargets();
+    this.collideWithWalls();
+    this.collideWithPaddle();
+    this.collideWithTargets();
   }
   collideWithWalls() {
     // Same code we used last week for the animation stuff
