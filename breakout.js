@@ -13,7 +13,7 @@ class Ball {
   constructor() {
     this.x = game.width / 2;
     this.y = game.height - 100;
-    this.vx = 3;
+    this.vx = random([1, -1]) * random(2, 3.5);
     this.vy = -3;
     this.size = 20;
   }
@@ -28,18 +28,32 @@ class Ball {
     this.collideWithTargets();
   }
   collideWithWalls() {
-    // Same code we used last week for the animation stuff
+    if (this.x <= 0) this.vx = Math.abs(this.vx);
+    if (this.x + this.size >= game.width) this.vx = -Math.abs(this.vx);
+    if (this.y <= 0) this.vy = Math.abs(this.vy);
+    if (this.y + this.size >= game.height) {
+      game.lives -= 1;
+      ball = new Ball();
+    }
   }
   collideWithPaddle() {
-    // Similar code to colliding with the wall
+    if (this.x + this.size >= paddle.x && this.x <= paddle.x + paddle.width && this.y + this.size >= paddle.y) {
+      this.vy = -Math.abs(this.vy);
+    }
   }
   collideWithTargets() {
-    // Similar code to colliding with the paddle, but check ALL of the targets!
     for (let i = 0; i < targets.length; i++) {
       const target = targets[i];
-      // if the ball is in the target...
-      targets.splice(i, 1);
-      return;
+      if (
+        this.x + this.size >= target.x &&
+        this.x <= target.x + target.width &&
+        this.y + this.size >= target.y &&
+        this.y <= target.y + target.height
+      ) {
+        targets.splice(i, 1);
+        game.points += 10;
+        return;
+      }
     }
   }
 }
@@ -47,13 +61,15 @@ class Ball {
 class Paddle {
   constructor() {
     this.y = game.height - 50;
+    this.x = 0;
     this.width = 200;
     this.height = 10;
   }
   draw() {
     fill("white");
     noStroke();
-    rect(mouseX - this.width / 2, this.y, this.width, this.height);
+    this.x = mouseX - this.width / 2;
+    rect(this.x, this.y, this.width, this.height);
   }
 }
 
