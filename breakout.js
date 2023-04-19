@@ -43,13 +43,14 @@ class Ball {
   }
   collideWithTargets() {
     for (let i = 0; i < targets.length; i++) {
-      const target = targets[i];
+      let target = targets[i];
       if (
         this.x + this.size >= target.x &&
         this.x <= target.x + target.width &&
         this.y + this.size >= target.y &&
         this.y <= target.y + target.height
       ) {
+        this.vy = -this.vy;
         targets.splice(i, 1);
         game.points += 10;
         return;
@@ -62,7 +63,7 @@ class Paddle {
   constructor() {
     this.y = game.height - 50;
     this.x = 0;
-    this.width = 200;
+    this.width = 150;
     this.height = 10;
   }
   draw() {
