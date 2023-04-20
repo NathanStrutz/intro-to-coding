@@ -23,11 +23,11 @@ class Ball {
     this.x += this.vx;
     this.y += this.vy;
 
-    this.collideWithWalls();
-    this.collideWithPaddle();
-    this.collideWithTargets();
+    this.bounceOffWalls();
+    this.bounceOffPaddle();
+    this.bounceOffTargets();
   }
-  collideWithWalls() {
+  bounceOffWalls() {
     if (this.x <= 0) this.vx = Math.abs(this.vx);
     if (this.x + this.size >= game.width) this.vx = -Math.abs(this.vx);
     if (this.y <= 0) this.vy = Math.abs(this.vy);
@@ -36,12 +36,12 @@ class Ball {
       ball = new Ball();
     }
   }
-  collideWithPaddle() {
+  bounceOffPaddle() {
     if (this.x + this.size >= paddle.x && this.x <= paddle.x + paddle.width && this.y + this.size >= paddle.y) {
       this.vy = -Math.abs(this.vy);
     }
   }
-  collideWithTargets() {
+  bounceOffTargets() {
     for (let i = 0; i < targets.length; i++) {
       let target = targets[i];
       if (

@@ -23,17 +23,17 @@ class Ball {
     this.x += this.vx;
     this.y += this.vy;
 
-    this.collideWithWalls();
-    this.collideWithPaddle();
-    this.collideWithTargets();
+    this.bounceOffWalls();
+    this.bounceOffPaddle();
+    this.bounceOffTargets();
   }
-  collideWithWalls() {
+  bounceOffWalls() {
     // Same code we used last week for the animation stuff
   }
-  collideWithPaddle() {
+  bounceOffPaddle() {
     // Similar code to colliding with the wall
   }
-  collideWithTargets() {
+  bounceOffTargets() {
     // Similar code to colliding with the paddle, but check ALL of the targets!
     for (let i = 0; i < targets.length; i++) {
       const target = targets[i];
