@@ -5,8 +5,19 @@ class Game {
   height = 600;
   lives = 3;
   points = 0;
-  targetRows = 5;
-  targetCols = 7;
+  targetRows = 2;
+  targetCols = 4;
+
+  draw() {
+    textSize(20);
+    fill("#C00");
+
+    textAlign(LEFT);
+    text(`${this.lives} Lives`, 10, this.height - 15);
+
+    textAlign(RIGHT);
+    text(`${this.points} Points`, this.width - 10, this.height - 15);
+  }
 }
 
 class Ball {
@@ -116,6 +127,7 @@ var setup = function () {
 
 var draw = function () {
   background(200);
+  game.draw();
   ball.draw();
   paddle.draw();
   for (const target of targets) {
@@ -124,6 +136,17 @@ var draw = function () {
 
   if (targets.length === 0) {
     // you win!
+    textAlign(CENTER);
+    textSize(50);
+    text("You Win!", 0, game.height / 2, game.width);
+    noLoop();
+  }
+
+  if (game.lives === 0) {
+    // you lose!
+    textAlign(CENTER);
+    textSize(50);
+    text("You Lose!", 0, game.height / 2, game.width);
     noLoop();
   }
 };
