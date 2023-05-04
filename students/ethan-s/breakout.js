@@ -10,7 +10,7 @@ class Game {
   targetCols = 5;
 }
 let targets = [];
-// console.log(game.lives);
+
 class Ball {
   constructor() {
     this.x = game.width / 2;
@@ -40,6 +40,8 @@ class Ball {
     }
     if (this.y > 600) {
       this.vy = -this.vy;
+      this.x = game.width / 2;
+      this.y = game.height - 100;
       game.lives--;
     }
   }
@@ -115,6 +117,7 @@ let target;
 
 var setup = function () {
   game = new Game();
+  console.log(game.lives);
   createCanvas(1250, 600);
   ball = new Ball();
   paddle = new Paddle();
@@ -124,7 +127,6 @@ var setup = function () {
     }
   }
 };
-
 var draw = function () {
   background(100, 25);
   ball.draw();
@@ -135,7 +137,7 @@ var draw = function () {
   if (targets.length === 0) {
     background("green");
     noLoop();
-  } else if (game.lives === 0) {
+  } else if (game.lives < 1) {
     background("red");
     noLoop();
   }
