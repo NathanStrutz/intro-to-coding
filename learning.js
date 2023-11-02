@@ -2,11 +2,37 @@
 console.log("Hello World!");
 
 // 9
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 console.log("Nathan " + "Strutz");
 console.log("123-555-1234");
 console.log(123 - 555 - 1234);
 
 // 10 Trees
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 let cl = console.log;
 let tree = function () {
   // half tree
@@ -31,7 +57,19 @@ let fullTree = function () {
 };
 cl("");
 
-// 11 Loops and functions
+// 11 Loops and functions - Christmas tree
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 let christmasTree = function (height) {
   let branches = "#";
   for (let index = 0; index < height; index++) {
@@ -41,9 +79,24 @@ let christmasTree = function (height) {
   console.log("#");
 };
 christmasTree(7);
+console.log("")
+
 christmasTree(75);
+console.log("")
 
 // 12 FizzBuzz
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 for (let i = 1; i <= 100; i++) {
   if (i % 15 === 0) {
     cl("FizzBuzz");
@@ -57,6 +110,18 @@ for (let i = 1; i <= 100; i++) {
 }
 
 // 12 Math functions
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 let add = function (a, b) {
   return a + b;
 };
