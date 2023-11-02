@@ -1,40 +1,47 @@
-/// <reference path="lib/p5.global.d.ts" />
+/// <reference path="../lib/p5.global.d.ts" />
 
 class Game {
   width = 1000;
   height = 600;
   lives = 3;
   points = 0;
-  targetRows = 5;
-  targetCols = 7;
+  targetRows = 2;
+  targetCols = 4;
+
+  draw() {
+    textSize(20);
+    fill("#C00");
+
+    textAlign(LEFT);
+    text(`${this.lives} Lives`, 10, this.height - 15);
+
+    textAlign(RIGHT);
+    text(`${this.points} Points`, this.width - 10, this.height - 15);
+  }
 }
 
 class Ball {
   constructor() {
     this.x = game.width / 2;
     this.y = game.height - 100;
+    this.vx = random([1, -1]) * random(2, 3.5);
+    this.vy = -3;
     this.size = 20;
-    let startingVelocity = {
-      x: random([1, -1]) * random(2, 3.5),
-      y: -3,
-    };
-    this.vector = createVector(startingVelocity.x, startingVelocity.y);
-    this.vector.setMag(3);
   }
   draw() {
     fill("red");
     square(this.x, this.y, this.size);
-    this.x += this.vector.x;
-    this.y += this.vector.y;
+    this.x += this.vx;
+    this.y += this.vy;
 
     this.bounceOffWalls();
     this.bounceOffPaddle();
     this.bounceOffTargets();
   }
   bounceOffWalls() {
-    if (this.x <= 0) this.vector.x = Math.abs(this.vector.x);
-    if (this.x + this.size >= game.width) this.vector.x = -Math.abs(this.vector.x);
-    if (this.y <= 0) this.vector.y = Math.abs(this.vector.y);
+    if (this.x <= 0) this.vx = Math.abs(this.vx);
+    if (this.x + this.size >= game.width) this.vx = -Math.abs(this.vx);
+    if (this.y <= 0) this.vy = Math.abs(this.vy);
     if (this.y + this.size >= game.height) {
       game.lives -= 1;
       ball = new Ball();
@@ -42,14 +49,7 @@ class Ball {
   }
   bounceOffPaddle() {
     if (this.x + this.size >= paddle.x && this.x <= paddle.x + paddle.width && this.y + this.size >= paddle.y) {
-      // bounce upward
-      this.vector.y = -Math.abs(this.vector.y);
-
-      // todo: rotate based on paddle bounce position
-
-      if (Math.abs(this.x - paddle.x) < this.size) {
-        ball.vector.rotate((-0.3 * PI) / 3);
-      }
+      this.vy = -Math.abs(this.vy);
     }
   }
   bounceOffTargets() {
@@ -61,7 +61,7 @@ class Ball {
         this.y + this.size >= target.y &&
         this.y <= target.y + target.height
       ) {
-        this.vector.y = -this.vector.y;
+        this.vy = -this.vy;
         targets.splice(i, 1);
         game.points += 10;
         return;
@@ -127,6 +127,7 @@ var setup = function () {
 
 var draw = function () {
   background(200);
+  game.draw();
   ball.draw();
   paddle.draw();
   for (const target of targets) {
@@ -135,6 +136,17 @@ var draw = function () {
 
   if (targets.length === 0) {
     // you win!
+    textAlign(CENTER);
+    textSize(50);
+    text("You Win!", 0, game.height / 2, game.width);
+    noLoop();
+  }
+
+  if (game.lives === 0) {
+    // you lose!
+    textAlign(CENTER);
+    textSize(50);
+    text("You Lose!", 0, game.height / 2, game.width);
     noLoop();
   }
 };

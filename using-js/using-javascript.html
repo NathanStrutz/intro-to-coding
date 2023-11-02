@@ -11,17 +11,20 @@
     <h1>Ultimate Questionnaire</h1>
     <p>Do you like fish sticks?</p>
 
-    <div id="app">
-      <button @click="clickYes()">Yes</button>
-      <button @click="clickNo()">No</button>
+    <button id="yesButton">Yes</button>
+    <button id="noButton">No</button>
 
-      <div id="answers">
-        <p v-if="showYes">Yeah, me too.</p>
-        <p v-if="showNo">Oh really? How sad.</p>
-      </div>
+    <div id="answers">
+      <p id="yesAnswer">Yeah, me too.</p>
+      <p id="noAnswer">Oh really? How sad.</p>
     </div>
 
-    <script src="lib/vue.js"></script>
-    <script src="using-vue-1.js"></script>
+    <!--
+    <script src="using-vanilla.js"></script>
+     -->
+    <!--
+    <script src="../lib/jquery.js"></script>
+    <script src="using-jquery.js"></script>
+     -->
   </body>
 </html>
