@@ -1,5 +1,7 @@
+let cl = console.log;
+
 // 8
-console.log("Hello World!");
+cl("Hello World!");
 
 // 9
 //
@@ -33,29 +35,29 @@ console.log(123 - 555 - 1234);
 //
 //
 //
-let cl = console.log;
-let tree = function () {
-  // half tree
-  let branches = "#";
-  for (let index = 0; index < 7; index++) {
-    cl(branches);
-    branches += "#";
-  }
-  cl("#");
-};
-let fullTree = function () {
-  // full tree
-  console.log("");
-  let branches = "#";
-  let leftSpace = " ".repeat(6);
-  for (let index = 0; index < 5; index++) {
-    cl(leftSpace + branches);
-    branches += "##";
-    leftSpace = " ".repeat(5 - index);
-  }
-  cl("     ##");
-};
+//
+cl("Tree # 1");
+for (let i = 1; i < 8; i++) {
+  cl("#".repeat(i));
+}
+cl("#");
 cl("");
+
+cl("Tree # 2");
+for (let i = "#"; i.length < 8; i += "#") {
+  cl(i);
+}
+cl("#");
+cl("");
+
+cl("Full Christmas tree");
+for (let i = 0; i < 8; i++) {
+  let whitespace = " ".repeat(8 - i / 2);
+  let branch = "#".repeat(i * 2);
+  cl(whitespace + branch);
+  // cl(" ".repeat(4 - i) + "#".repeat(i * 2));
+}
+cl("    ##");
 
 // 11 Loops and functions - Christmas tree
 //
@@ -70,19 +72,19 @@ cl("");
 //
 //
 //
-let christmasTree = function (height) {
-  let branches = "#";
-  for (let index = 0; index < height; index++) {
-    console.log(branches);
-    branches += "#";
-  }
-  console.log("#");
-};
-christmasTree(7);
-console.log("")
 
-christmasTree(75);
-console.log("")
+cl("Tree with a function");
+let tree = function (size) {
+  for (let i = 1; i < size; i++) {
+    cl("#".repeat(i));
+  }
+  cl("#");
+};
+cl("");
+tree(12);
+cl("");
+tree(5);
+cl("");
 
 // 12 FizzBuzz
 //
