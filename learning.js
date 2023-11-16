@@ -48,16 +48,6 @@ for (let i = "#"; i.length < 8; i += "#") {
   cl(i);
 }
 cl("#");
-cl("");
-
-cl("Full Christmas tree");
-for (let i = 0; i < 8; i++) {
-  let whitespace = " ".repeat(8 - i / 2);
-  let branch = "#".repeat(i * 2);
-  cl(whitespace + branch);
-  // cl(" ".repeat(4 - i) + "#".repeat(i * 2));
-}
-cl("    ##");
 
 // 11 Loops and functions - Christmas tree
 //
@@ -110,6 +100,11 @@ for (let i = 1; i <= 100; i++) {
     cl(i);
   }
 }
+
+cl("")
+
+cl([...Array(100)].map((_,v)=>(v%3?"":"Fizz")+(v%5?"":"Buzz")||v));
+
 
 // 12 Math functions
 //
