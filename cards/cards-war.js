@@ -106,7 +106,7 @@ let getTopCard = function (hand) {
   return hand.splice(0, 1)[0];
 };
 let winRound = function (player, cards) {
-  player.hand.unshift(...cards.filter((card) => card));
+  player.hand.push(...cards.filter((card) => card));
   player.wins++;
   return player;
 };
