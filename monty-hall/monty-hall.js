@@ -15,7 +15,7 @@ let montyHall = function (switchDoor = false) {
 };
 
 stats = {
-  runs: 100000,
+  runs: 10000000,
   wins: 0,
   losses: 0,
 };
