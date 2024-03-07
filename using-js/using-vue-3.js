@@ -1,9 +1,11 @@
 let YesButton = {
   template: `<button @click="$emit('do')">Yes!</button>`,
+  emits: ["do"]
 };
 
 let NoButton = {
   template: `<button @click="$emit('do')">No!</button>`,
+  emits: ["do"]
 };
 
 let AnswerArea = {
@@ -17,10 +19,10 @@ let AnswerArea = {
 
 Vue.createApp({
   template: `
-    <yes-button @do="show = 'yes'" />
-    <no-button @do="show = 'no'" />
+    <YesButton @do="show = 'yes'" />
+    <NoButton @do="show = 'no'" />
 
-    <answer-area id="answers" :show="show" />
+    <AnswerArea id="answers" :show="show" />
   `,
   components: {
     YesButton,
