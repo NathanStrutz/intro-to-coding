@@ -1,9 +1,9 @@
 $("#yesButton").click(function () {
-  $("#yes").slideDown();
-  $("#no").slideUp();
+  $("#answerYes").slideDown();
+  $("#answerNo").slideUp();
 });
 $("#noButton").click(function () {
-  $("#yes").fadeOut(function () {
-    $("#no").fadeIn();
+  $("#answerYes").fadeOut(function () {
+    $("#answerNo").fadeIn();
   });
 });
