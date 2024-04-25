@@ -31,10 +31,24 @@ class Ball {
     this.bounceOffPaddle();
     this.bounceOffTargets();
   }
+  bounceX() {
+    if (this.vector.y < 0) {
+      this.vector.rotate(-HALF_PI);
+    } else {
+      this.vector.rotate(HALF_PI);
+    }
+  }
+  bounceY() {
+    if (this.vector.x < 0) {
+      this.vector.rotate(HALF_PI);
+    } else {
+      this.vector.rotate(-HALF_PI);
+    }
+  }
   bounceOffWalls() {
-    if (this.x <= 0) this.vector.x = Math.abs(this.vector.x);
-    if (this.x + this.size >= game.width) this.vector.x = -Math.abs(this.vector.x);
-    if (this.y <= 0) this.vector.y = Math.abs(this.vector.y);
+    if (this.x <= 0) this.bounceX();
+    if (this.x + this.size >= game.width) this.bounceX();
+    if (this.y <= 0) this.bounceY();
     if (this.y + this.size >= game.height) {
       game.lives -= 1;
       ball = new Ball();
@@ -43,13 +57,14 @@ class Ball {
   bounceOffPaddle() {
     if (this.x + this.size >= paddle.x && this.x <= paddle.x + paddle.width && this.y + this.size >= paddle.y) {
       // bounce upward
-      this.vector.y = -Math.abs(this.vector.y);
+      // this.vector.y = -Math.abs(this.vector.y);
+      this.bounceY();
 
       // todo: rotate based on paddle bounce position
 
-      if (Math.abs(this.x - paddle.x) < this.size) {
-        ball.vector.rotate((-0.3 * PI) / 3);
-      }
+      // if (Math.abs(this.x - paddle.x) < this.size) {
+      //   this.vector.rotate((-0.3 * PI) / 3);
+      // }
     }
   }
   bounceOffTargets() {
@@ -61,7 +76,7 @@ class Ball {
         this.y + this.size >= target.y &&
         this.y <= target.y + target.height
       ) {
-        this.vector.y = -this.vector.y;
+        this.bounceY();
         targets.splice(i, 1);
         game.points += 10;
         return;
