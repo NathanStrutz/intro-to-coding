@@ -7,21 +7,42 @@ class Game {
   height = window.innerHeight - 5;
   targetColumns = 8;
   targetRows = 4;
+
+  draw() {
+    textSize(20);
+    text(`${this.points} points`, 20, this.height - 20);
+
+    text(`${this.lives} lives`, game.width - 100, this.height - 20);
+
+    if (targets.length === 0) {
+      // You win!
+      textSize(100);
+      textAlign(CENTER);
+      text("You Win!", this.width / 2, this.height / 2);
+      noLoop();
+    }
+    if (this.lives === 0) {
+      // You lose!
+      textSize(100);
+      textAlign(CENTER);
+      text("You Lose!", this.width / 2, this.height / 2);
+      noLoop();
+    }
+  }
 }
 
 class Ball {
   constructor() {
-    console.log("New Ball made!");
     this.x = 10;
-    this.y = game.height - 20;
-    this.vx = 5;
-    this.vy = -5;
-    this.size = 15;
+    this.y = game.height - 100;
+    this.vx = random(4, 6);
+    this.vy = -random(4, 6);
+    this.size = random(10, 25);
+    this.color = [0, 0, 0, 255];
   }
   draw() {
-    stroke("black");
-    strokeWeight(2);
-    fill("red");
+    noStroke();
+    fill(this.color);
     square(this.x, this.y, this.size);
     this.x += this.vx;
     this.y += this.vy;
@@ -30,7 +51,6 @@ class Ball {
     this.bounceOffPaddle();
     this.bounceOffTargets();
   }
-
   bounceOffWalls() {
     if (this.x < 0 || this.x + this.size > game.width) {
       this.vx = -this.vx;
@@ -65,6 +85,11 @@ class Ball {
         this.vy = -this.vy;
         game.points += 5;
         targets.splice(i, 1);
+
+        this.color[3] *= 0.8;
+        this.vx *= 1.02;
+        this.vy *= 1.02;
+        paddle.width *= 0.95;
       }
     }
   }
@@ -121,10 +146,11 @@ var setup = function () {
 };
 
 var draw = function () {
-  background(200);
+  background([240, 240, 255, 90]);
   ball.draw();
   paddle.draw();
   for (const target of targets) {
     target.draw();
   }
+  game.draw();
 };
