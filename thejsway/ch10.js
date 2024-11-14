@@ -4,7 +4,7 @@ import { cl, title, prompt } from "./util.js";
   title("Movies before Y2K");
   // Improve the example movie program from above so that it shows the titles of movies released
   // before year 2000, using functional programming.
-  const movieList = [
+  let movieList = [
     {
       title: "Batman",
       year: 1989,
@@ -48,15 +48,11 @@ import { cl, title, prompt } from "./util.js";
       imdbRating: 8.5,
     },
   ];
-
-  let moviesBefore2000 = movieList.filter((m) => m.year < 2000).map((m) => m.title);
-
-  console.log(moviesBefore2000);
 }
 {
   title("Government forms");
   // Complete the following program to compute and show the names of political forms ending with "cy".
-  const governmentForms = [
+  let governmentForms = [
     {
       name: "Plutocracy",
       definition: "Rule by the wealthy",
@@ -82,26 +78,16 @@ import { cl, title, prompt } from "./util.js";
       definition: "Rule by a single person",
     },
   ];
-
-  let formsEndingWithCy = governmentForms.filter((g) => g.name.match(/cy$/i)).map((g) => g.name);
-
-  // Should show ["Plutocracy", "Kleptocracy", "Theocracy", "Democracy", "Autocracy"]
-  console.log(formsEndingWithCy);
 }
 {
   title("Arrays sum");
   // Complete the following program to compute and show the total sum of the values in each of the arrays.
-  const arrays = [[1, 4], [11], [3, 5, 7]];
-
-  // compute the value of the arraysSum variable
-  let arraysSum = arrays.flat().reduce((a, b) => a + b, 0);
-
-  console.log(arraysSum, "Should show 31");
+  let arrays = [[1, 4], [11], [3, 5, 7]];
 }
 {
   title("Refactor Student results");
   // Here's a program that shows female students results (name and average grade).
-  const students = [
+  let students = [
     {
       name: "Anna",
       sex: "f",
@@ -125,24 +111,4 @@ import { cl, title, prompt } from "./util.js";
     },
   ];
   // Compute female student results
-  const femaleStudentsResults = [];
-  for (const student of students) {
-    if (student.sex === "f") {
-      let gradesSum = 0;
-      for (const grade of student.grades) {
-        gradesSum += grade;
-      }
-      const averageGrade = gradesSum / student.grades.length;
-      femaleStudentsResults.push({
-        name: student.name,
-        avgGrade: averageGrade,
-      });
-    }
-  }
-  console.log(femaleStudentsResults);
-  cl("Refactored: ");
-  let refactoredResults = students
-    .filter((s) => s.sex === "f")
-    .map((s) => ({ name: s.name, avgGrade: s.grades.reduce((a, b) => a + b, 0) / s.grades.length }));
-  console.log(refactoredResults);
 }

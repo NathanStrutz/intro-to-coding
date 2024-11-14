@@ -4,7 +4,7 @@ import { cl, title, prompt } from "./util.js";
   // Complete the following program so that it asks the user for his first and last names, then show the result of the sayHello() function.
   // Say hello to the user
   function sayHello(firstName, lastName) {
-    const message = `Hello, ${firstName} ${lastName}!`;
+    let message = `Hello, ${firstName} ${lastName}!`;
     return message;
   }
   cl(sayHello("Nathan", "Strutz"));
@@ -17,7 +17,7 @@ import { cl, title, prompt } from "./util.js";
     return x * x;
   }
   // Square the given number x
-  const square2 = square1;
+  let square2 = square1;
   cl(square1(0), "Must show 0");
   cl(square1(2), "Must show 4");
   cl(square1(5), "Must show 25");
@@ -54,10 +54,4 @@ import { cl, title, prompt } from "./util.js";
 {
   title("Circle Calculation");
   // Write a program containing two functions to calculate the circumference and area of a circle defined by its radius. Test it using user input.
-
-  let circumference = (rad) => 2 * Math.PI * rad;
-  let circleArea = (rad) => Math.PI * rad ** 2;
-
-  cl(`When the radius is 5, the circumference is`, circumference(5));
-  cl(`When the radius is 5, the area is`, circleArea(5));
 }
