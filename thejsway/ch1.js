@@ -1,24 +1,19 @@
-const cl = console.log;
+import { cl, title, prompt } from "./util.js";
 {
-  // 1. Presentation
+  title("Presentation");
   // Write a program that displays your name and age. Here’s the result for mine.
-  cl("Nathan");
-  cl(new Date().getFullYear() - new Date("1979-01-01T14:06:37").getFullYear());
+  // Put your code here ↓
+
+  // Put your code here ↑
 }
 
 {
-  // Minimalistic calculator
+  title("Minimalistic calculator");
   // Write a program that displays the results of adding, subtracting, multiplying and dividing 6 by 3.
-  cl("Add: ", 6 + 3);
-  cl("Subtract: ", 6 - 3);
-  cl("Multiply: ", 6 * 3);
-  cl("Divide: ", 6 / 3);
+  // Always put your code INSIDE the curly braces
 }
 
 {
-  // Values prediction
+  title("Values prediction");
   // Observe the following program and try to predict the values it displays.
-  console.log(4 + 5); // 9
-  console.log("4 + 5"); // "4 + 5"
-  console.log("4" + "5"); // "45"
 }
