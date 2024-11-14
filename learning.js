@@ -76,6 +76,37 @@ cl("");
 tree(5);
 cl("");
 
+// 11 Full Christmas tree
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+let tree2D = function (size) {
+  let spaces = " ".repeat(size);
+  let branch = "#";
+  for (let i = 1; i <= size; i++) {
+    cl(spaces+branch);
+    branch += "##";
+    // spaces.slice(0,2);
+    spaces = spaces.substring(1)
+  }
+  cl(" ".repeat(size) + "#");
+};
+cl("");
+tree2D(4);
+cl("");
+
+/*
+
 // 12 FizzBuzz
 //
 //
@@ -138,3 +169,5 @@ cl("subtract", subtract(10, 15) == -5);
 cl("subtract", subtract(15, 10) == 5);
 cl("multiply", multiply(5, 10) == 50);
 cl("divide", divide(15, 5) == 3);
+
+*/
