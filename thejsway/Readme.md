@@ -23,3 +23,39 @@ I'm also providing you with some basic utils that are imported at the top of eve
 - `cl` - the familiar shortcut to "console.log" - just use `cl("anything");`
 - `title` - it just prints titles to separate each section in your files
 - `prompt` - replicates the web browser's prompt functionality to take in user input
+
+## Your Homework
+
+Please try to complete at least 20 exercises. I recommend these ones because they are the easiest:
+
+    - Chapter 1: Presentation
+    - Chapter 1: Minimalistic calculator
+    - Chapter 1: Values prediction
+    - Chapter 2: Improved hello
+    - Chapter 2: Final values
+    - Chapter 2: VAT calculation
+    - Chapter 2: From Celsius to Fahrenheit degrees
+    - Chapter 2: Variable swapping
+    - Chapter 3: Number comparison
+    - Chapter 3: Final values
+    - Chapter 3: Number of days in a month
+    - Chapter 4: Parity
+    - Chapter 4: Input Validation
+    - Chapter 4: Multiplication table
+    - Chapter 5: Improved hello
+    - Chapter 5: Minimum of two numbers
+    - Chapter 6: Adding character experience
+    - Chapter 7: Sum of values
+    - Chapter 7: Array maximum
+    - Chapter 8: Word info
+
+## Grading
+
+This is a "Major Project" (100 points). The rubric will be on our Google Classroom, but it looks like this:
+
+- Tell me you read it: 50 points
+- 5 exercises: 63 points
+- 10 exercises: 75 points
+- 15 exercises: 88 points
+- 20 exercises: 100 points
+- More? Up to 120 points!
