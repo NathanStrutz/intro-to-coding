@@ -2,9 +2,9 @@
 
 #### Welcome to your holiday homework package!
 
-In the first week of January, we are going to start building fun interactive programs. Read the book TheJsWay and complete the assignments at the end of each chapter.
+In the first week of January, we are going to start building fun interactive programs. Read the book TheJsWay, just the "introduction" and "Learn to code programs" chapters, and complete the assignments at the end of each chapter.
 
-The files are organized in chapters, so puzzles from chapter 1 are in "ch1.js", chapter 2 in "ch2.js", and so on. The exact text from the question is in the book, but most of the chapter files have the text from that challenge.
+Use the files in this folder to help you organize and fill out your answers. The files are organized in chapters, so puzzles from chapter 1 are in "ch1.js", chapter 2 in "ch2.js", and so on. The exact text from the question is in the book, but most of the chapter files have the text from that challenge.
 
 ## Setup
 

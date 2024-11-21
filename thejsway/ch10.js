@@ -1,7 +1,7 @@
-import { cl, title, prompt } from "./util.js";
-
+import { cl, title, bigTitle, prompt } from "./util.js";
+bigTitle("Chapter 10: Discover functional programming");
 {
-  title("Movies before Y2K");
+  title("Older movies");
   // Improve the example movie program from above so that it shows the titles of movies released
   // before year 2000, using functional programming.
   let movieList = [
@@ -83,6 +83,10 @@ import { cl, title, prompt } from "./util.js";
   title("Arrays sum");
   // Complete the following program to compute and show the total sum of the values in each of the arrays.
   let arrays = [[1, 4], [11], [3, 5, 7]];
+  // TODO: compute the value of the arraysSum variable
+  /*
+    cl(arraysSum); // Should show 31
+  */
 }
 {
   title("Refactor Student results");
@@ -111,4 +115,5 @@ import { cl, title, prompt } from "./util.js";
     },
   ];
   // Compute female student results
+  // Refactor it using functional programming. Make sure the result is correct.
 }
