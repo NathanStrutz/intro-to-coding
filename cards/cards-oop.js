@@ -87,28 +87,71 @@ class Card {
         return "♣";
     }
   }
+  draw() {
+    let ill = this.getIllustrator();
+    let out = "";
+    out += ill.at(1);
+    out += "\n";
+    out += ill.at(2);
+    out += "\n";
+    out += ill.at(3);
+    out += "\n";
+    out += ill.at(4);
+    out += "\n";
+    out += ill.at(5);
+    out += "\n";
+  }
+  getIllustrator() {
+    return new CardIllustrator(this);
+  }
+}
+class CardIllustrator {
+  constructor(card) {
+    this.card = card;
+  }
+  at(h) {
+    switch (h) {
+      case 1:
+        return `┌─────┐ `;
+      case 2:
+        return `│${this.card.symbol}    │ `;
+      case 3:
+        return `│  ${this.card.shortName}${" ".repeat(3 - this.card.shortName.length)}│ `;
+      case 4:
+        return `│    ${this.card.symbol}│ `;
+      case 5:
+        return `└─────┘ `;
+    }
+  }
 }
 
-class Hand {
-  constructor(deck) {
-    this.cards = deck.dealHand();
-    this.cards.sort((a, b) => a.rank - b.rank);
+class CardCollection {
+  constructor(cards) {
+    this.cards = cards;
   }
   draw() {
-    let out = "";
-    this.cards.forEach((card) => (out += `┌─────┐ `));
-    out += "\n";
-    this.cards.forEach((card) => (out += `│${card.symbol}    │ `));
-    out += "\n";
-    this.cards.forEach((card) => (out += `│  ${card.shortName}${" ".repeat(3 - card.shortName.length)}│ `));
-    out += "\n";
-    this.cards.forEach((card) => (out += `│    ${card.symbol}│ `));
-    out += "\n";
-    this.cards.forEach((card) => (out += `└─────┘ `));
-    cl(out);
+    let illustrators = this.cards.map((c) => c.getIllustrator());
+    let outRows = [1, 2, 3, 4, 5].reduce(
+      (out, i) => (out += illustrators.reduce((line, ill) => (line += ill.at(i)), "") + "\n"),
+      ""
+    );
+    console.log(outRows);
+  }
+}
+
+class Hand extends CardCollection {
+  constructor(deck) {
+    let c = deck.dealHand();
+    super(c);
+    this.cards = c;
+    this.cards.sort((a, b) => a.rank - b.rank);
   }
 }
 
 let deck = new Deck();
 let hand = new Hand(deck);
 hand.draw();
+
+console.log("  🡫");
+let miscCards = new CardCollection([hand.cards[0], deck.dealCard()]);
+miscCards.draw();
