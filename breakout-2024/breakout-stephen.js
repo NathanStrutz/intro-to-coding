@@ -5,8 +5,8 @@ class Game {
   lives = 3;
   width = window.innerWidth;
   height = window.innerHeight - 5;
-  targetColumns = 8;
-  targetRows = 4;
+  targetColumns = 2;
+  targetRows = 2;
   paddleWidth = 150; // Initial paddle width
 
   draw() {
@@ -148,7 +148,7 @@ var setup = function () {
   let targetWidth = game.width / game.targetColumns;
   let targetHeight = 20;
   let targetGap = 5;
-  for (let y = 0; y < 4; y++) {
+  for (let y = 0; y < 1; y++) {
     for (let x = 0; x < game.targetColumns; x++) {
       targets.push(
         new Target(

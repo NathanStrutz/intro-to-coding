@@ -1,10 +1,10 @@
 let paddle;
 let ball;
-let bricks = [];
-let brickRows = 5;
-let brickCols = 10;
-let brickWidth;
-let brickHeight;
+let targets = [];
+let brickRows = 12;
+let brickCols = 2;
+let targetWidth;
+let targetHeight;
 let score = 0;
 let lives = 3;
 let gameOver = false;
@@ -13,8 +13,8 @@ function setup() {
   createCanvas(800, 600);
   paddle = new Paddle();
   ball = new Ball();
-  brickWidth = width / brickCols;
-  brickHeight = 30;
+  targetWidth = width / brickCols;
+  targetHeight = 30;
   createBricks();
 }
 
@@ -28,10 +28,10 @@ function draw() {
   ball.checkCollision();
   ball.display();
 
-  for (let i = bricks.length - 1; i >= 0; i--) {
-    bricks[i].display();
-    if (ball.hits(bricks[i])) {
-      bricks.splice(i, 1);
+  for (let i = targets.length - 1; i >= 0; i--) {
+    targets[i].display();
+    if (ball.hits(targets[i])) {
+      targets.splice(i, 1);
       ball.reverse("y");
       score++;
     }
@@ -40,7 +40,7 @@ function draw() {
   displayScore();
   displayLives();
 
-  if (bricks.length === 0) {
+  if (targets.length === 0) {
     gameOver = true;
     textSize(32);
     fill(255);
@@ -67,9 +67,7 @@ function draw() {
 function createBricks() {
   for (let i = 0; i < brickRows; i++) {
     for (let j = 0; j < brickCols; j++) {
-      bricks.push(
-        new Brick(j * brickWidth, i * brickHeight + 50, brickWidth, brickHeight)
-      );
+      targets.push(new Target(j * targetWidth, i * targetHeight + 50, targetWidth, targetHeight));
     }
   }
 }
@@ -142,21 +140,12 @@ class Ball {
   }
 
   hits(brick) {
-    let d = dist(
-      this.x,
-      this.y,
-      brick.x + brick.width / 2,
-      brick.y + brick.height / 2
-    );
+    let d = dist(this.x, this.y, brick.x + brick.width / 2, brick.y + brick.height / 2);
     return d < this.size / 2 + brick.width / 2;
   }
 
   checkCollision() {
-    if (
-      this.x > paddle.x &&
-      this.x < paddle.x + paddle.width &&
-      this.y + this.size / 2 > paddle.y
-    ) {
+    if (this.x > paddle.x && this.x < paddle.x + paddle.width && this.y + this.size / 2 > paddle.y) {
       this.reverse("y");
     }
   }
@@ -182,7 +171,7 @@ class Ball {
   }
 }
 
-class Brick {
+class Target {
   constructor(x, y, width, height) {
     this.x = x;
     this.y = y;
