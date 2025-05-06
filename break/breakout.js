@@ -3,9 +3,28 @@
 class Game {
   lives = 3;
   score = 0;
-  targetRows = 10;
-  targetCols = 4;
+  targetRows = random(2, 10);
+  targetCols = random(2, 10);
   draw() {
+    if (targets.length === 0) {
+      // You win
+      background("green");
+      textSize(150);
+      textAlign("center");
+      fill("white");
+      text("You won! Congratulations!", 0, height / 2 - height * 0.15, width);
+      noLoop();
+    }
+    if (this.lives === 0) {
+      // You Lose
+      background("red");
+      textSize(100);
+      textAlign("center");
+      fill("white");
+      text("You are such a loser!", 0, height / 2 - height * 0.15, width);
+      noLoop();
+    }
+
     // draw scoreboard
     fill("white");
     textSize(25);
@@ -13,11 +32,6 @@ class Game {
     text(`Score: ${this.score}`, 20, height - 15);
     textAlign("right");
     text(`${this.lives} :Lives`, width - 20, height - 15);
-
-    if (targets.length === 0) {
-      //display game over
-      noLoop();
-    }
   }
 }
 
@@ -77,6 +91,11 @@ class Ball {
         this.vy = -this.vy;
         targets.splice(i, 1);
         game.score += 25;
+        // speed up the ball
+        this.vx = min(this.vx * 1.1, 10);
+        this.vy = min(this.vy * 1.1, 10);
+        // change the paddle size
+        paddle.width = min(max(paddle.width * random(0.85, 1.15), 40), 250);
       }
     }
   }
@@ -86,6 +105,7 @@ class Ball {
       this.x < paddle.x + paddle.width &&
       this.y + this.size > paddle.y) {
       this.vy = -Math.abs(this.vy);
+      this.vx = this.vx * random(.85, 1.15)
     }
   }
 }
@@ -106,6 +126,7 @@ class Target {
 let game;
 let paddle;
 let ball;
+let ball2;
 let targets = [];
 
 var setup = function () {
@@ -114,6 +135,7 @@ var setup = function () {
   game = new Game();
   paddle = new Paddle();
   ball = new Ball();
+  ball2 = new Ball();
 
   for (let x = 0; x < game.targetRows; x++) {
     for (let y = 0; y <= game.targetCols; y++) {
@@ -123,15 +145,16 @@ var setup = function () {
 };
 
 var draw = function () {
-  background(66);
-  // draw game
-  game.draw();
+  background(88,88,88,160);
   // draw ball
   ball.draw();
+  ball2.draw();
   // draw targets
   for (let target of targets) {
     target.draw();
   }
   // draw paddle
   paddle.draw();
+  // draw game
+  game.draw();
 };
