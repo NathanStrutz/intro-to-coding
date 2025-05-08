@@ -3,8 +3,8 @@
 class Game {
       lives = 2;
       score = 0;
-      targetRows = random(2, 10);
-      targetCols = random(2, 8);
+      targetRows = 2; //random(2, 10);
+      targetCols = 2; //random(2, 8);
       draw() {
       fill("black");
       textSize(25);
