@@ -1,37 +1,38 @@
-///<reference path="../lib/p5.global.d.ts" />
+///<reference path="lib/p5.global.d.ts" />
 
 class Game {
-  lives = 3;
-  score = 0;
-  targetRows = random(2, 10);
-  targetCols = random(2, 10);
-  draw() {
-    if (targets.length === 0) {
-      // You win
-      background("green");
-      textSize(150);
-      textAlign("center");
-      fill("white");
-      text("You won! Congratulations!", 0, height / 2 - height * 0.15, width);
-      noLoop();
-    }
-    if (this.lives === 0) {
-      // You Lose
-      background("red");
-      textSize(100);
-      textAlign("center");
-      fill("white");
-      text("You are such a loser!", 0, height / 2 - height * 0.15, width);
-      noLoop();
-    }
+  constructor() {
+    this.lives = 5;
+    this.score = 0;
+    this.targetRows = 50;
+    this.targetCols = 15;
+  }
 
-    // draw scoreboard
-    fill("white");
-    textSize(25);
+  draw() {
+    fill(255);
+    textSize(24);
     textAlign("left");
-    text(`Score: ${this.score}`, 20, height - 15);
+    text(`Lives: ${this.lives} | Score: ${this.score}`, 20, height - 15);
     textAlign("right");
     text(`${this.lives} :Lives`, width - 20, height - 15);
+
+    if (targets.length === 0) {
+      textAlign(CENTER, CENTER);
+      textSize(120);
+      fill(0, 255, 0);
+      text("You Win!", width / 2, height / 2);
+      noLoop();
+    } else if (this.lives === 0) {
+      textAlign(CENTER, CENTER);
+      textSize(120);
+      fill("black");
+      text("You Lose!", width / 2, height / 2);
+      noLoop();
+    }
+    if (this.score === 10000) {
+      this.lives += 1;
+      this.score = 0;
+    }
   }
 }
 
@@ -45,7 +46,7 @@ class Paddle {
   draw() {
     this.x = mouseX - this.width / 2;
     fill("white");
-    rect(this.x, this.y, this.width, this.height);
+    rect(this.x, this.y, this.width, 20);
   }
 }
 
@@ -53,13 +54,13 @@ class Ball {
   constructor() {
     this.x = random(0, width);
     this.y = height - 100;
-    this.vx = random(4.8, 5.2);
+    this.vx = random(5, 8);
     this.vy = -5;
-    this.size = 20;
+    this.size = 10;
   }
   draw() {
-    fill("red");
-    square((this.x += this.vx), (this.y += this.vy), this.size);
+    fill("black");
+    circle((this.x += this.vx), (this.y += this.vy), this.size);
     this.bounceOffWalls();
     this.bounceOffTargets();
     this.bounceOffPaddle();
@@ -74,13 +75,13 @@ class Ball {
     if (this.y < 0) {
       this.vy = Math.abs(this.vy);
     }
-    if (this.y + this.size > height) {
+    if (this.y > height) {
       game.lives--;
       ball = new Ball();
     }
   }
   bounceOffTargets() {
-    for (let i in targets) {
+    for (let i = 0; i < targets.length; i++) {
       let target = targets[i];
       if (
         this.x + this.size > target.x &&
@@ -89,23 +90,20 @@ class Ball {
         this.y < target.y + target.height
       ) {
         this.vy = -this.vy;
+        game.score += 100;
         targets.splice(i, 1);
-        game.score += 25;
-        // speed up the ball
-        this.vx = min(this.vx * 1.1, 10);
-        this.vy = min(this.vy * 1.1, 10);
-        // change the paddle size
-        paddle.width = min(max(paddle.width * random(0.85, 1.15), 40), 250);
+        this.vx = this.vx * 1.01;
+        this.vy = this.vy * 1.01;
       }
     }
   }
   bounceOffPaddle() {
-    // prettier-ignore
-    if (this.x + this.size > paddle.x &&
+    if (
+      this.x + this.size > paddle.x &&
       this.x < paddle.x + paddle.width &&
-      this.y + this.size > paddle.y) {
+      this.y + this.size > paddle.y
+    ) {
       this.vy = -Math.abs(this.vy);
-      this.vx = this.vx * random(.85, 1.15)
     }
   }
 }
@@ -115,7 +113,7 @@ class Target {
     this.x = x;
     this.y = y;
     this.width = width / game.targetRows;
-    this.height = 30;
+    this.height = 5;
   }
   draw() {
     fill("blue");
@@ -126,16 +124,15 @@ class Target {
 let game;
 let paddle;
 let ball;
-let ball2;
+
 let targets = [];
 
 var setup = function () {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(1530, 765);
 
   game = new Game();
   paddle = new Paddle();
   ball = new Ball();
-  ball2 = new Ball();
 
   for (let x = 0; x < game.targetRows; x++) {
     for (let y = 0; y <= game.targetCols; y++) {
@@ -145,16 +142,15 @@ var setup = function () {
 };
 
 var draw = function () {
-  background(88,88,88,160);
-  // draw ball
+  background("red");
+
+  game.draw();
+
   ball.draw();
-  ball2.draw();
-  // draw targets
+
   for (let target of targets) {
     target.draw();
   }
-  // draw paddle
+
   paddle.draw();
-  // draw game
-  game.draw();
 };
