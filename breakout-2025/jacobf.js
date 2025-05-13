@@ -1,3 +1,5 @@
+// 58/158 = 37% of lines written by chatGPT
+
 let game;
 let paddle;
 let ball;
