@@ -1,19 +1,19 @@
 let cl = console.log;
 let runResults = [];
 
-for (let index = 0; index < 100000; index++) {
-  let lootBoxes = 25;
+for (let run = 0; run < 100000; run++) {
+  let targetCoupons = 1000;
   let found = new Set();
-  let i = 0;
+  let opened = 0;
   let getNextLoot = function () {
-    return Math.ceil(Math.random() * lootBoxes);
+    return Math.ceil(Math.random() * targetCoupons);
   };
   // let getStats = function () {
   //   return `${found.size} of ${lootBoxes} found: ${Math.round((found.size / lootBoxes) * 100)}%`;
   // };
 
-  while (found.size < lootBoxes) {
-    i++;
+  while (found.size < targetCoupons) {
+    opened++;
     let nextLoot = getNextLoot();
 
     if (found.has(nextLoot)) {
@@ -24,16 +24,15 @@ for (let index = 0; index < 100000; index++) {
     }
   }
 
-  runResults.push(i);
-  // cl("Attempts:", i);
+  runResults.push(opened);
 }
 
 cl(`Average attempts from ${runResults.length} runs:`, runResults.reduce((agg, cur) => agg + cur, 0) / runResults.length);
 cl(
   "Fastest:",
-  runResults.reduce((best, cur) => (best > cur ? cur : best), 9999999)
+  runResults.reduce((best, cur) => (best > cur ? cur : best), 9999999),
 );
 cl(
   "Slowest:",
-  runResults.reduce((best, cur) => (best < cur ? cur : best), 0)
+  runResults.reduce((best, cur) => (best < cur ? cur : best), 0),
 );
