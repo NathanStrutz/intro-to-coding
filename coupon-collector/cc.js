@@ -30,7 +30,7 @@ for (let run = 0; run < 100000; run++) {
 cl(`Average attempts from ${runResults.length} runs:`, runResults.reduce((agg, cur) => agg + cur, 0) / runResults.length);
 cl(
   "Fastest:",
-  runResults.reduce((best, cur) => (best > cur ? cur : best), 9999999),
+  runResults.reduce((best, cur) => (best > cur ? cur : best), runResults[0]),
 );
 cl(
   "Slowest:",
