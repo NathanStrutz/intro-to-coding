@@ -1,93 +1,86 @@
 // ChatGPT 2026
-// p5.js Generative Art — "Electric Garden"
-// Static piece (no animation). Refresh to generate a new one.
+// p5.js generative art — "Crystal Quilt"
+// Static artwork (no animation). Refresh for a new variation.
 
 function setup() {
   createCanvas(900, 900);
   colorMode(HSB, 360, 100, 100, 100);
+  angleMode(RADIANS);
   noLoop();
+  background(220, 20, 8);
 
-  background(230, 15, 8);
+  let palette = [color(200, 80, 100), color(260, 70, 100), color(300, 60, 100), color(180, 60, 100), color(340, 70, 100)];
 
-  drawTexture();
-  drawPetals();
-  drawFilaments();
-  drawDust();
+  drawGrid(palette);
+  drawGlow();
+  drawFilmGrain();
 }
 
-function drawTexture() {
-  // subtle paper-like noise
-  for (let i = 0; i < 120000; i++) {
-    stroke(0, 0, random(10, 20), 3);
-    point(random(width), random(height));
-  }
-}
+function drawGrid(palette) {
+  let cols = 9;
+  let rows = 9;
 
-function drawPetals() {
-  translate(width / 2, height / 2);
+  let w = width / cols;
+  let h = height / rows;
 
-  let layers = 7;
-
-  for (let l = 0; l < layers; l++) {
-    let radius = 90 + l * 70;
-    let petals = 10 + l * 4;
-    let hue = random(180, 320);
-
-    for (let i = 0; i < petals; i++) {
-      let a = (TWO_PI / petals) * i;
-
+  for (let gx = 0; gx < cols; gx++) {
+    for (let gy = 0; gy < rows; gy++) {
       push();
-      rotate(a);
 
-      let wobble = random(-0.25, 0.25);
-      rotate(wobble);
+      translate(gx * w + w / 2, gy * h + h / 2);
 
-      noStroke();
-      fill(hue + random(-15, 15), 70, random(70, 100), 70);
+      let rot = floor(random(4)) * HALF_PI;
+      rotate(rot);
 
-      beginShape();
-      for (let t = 0; t < PI; t += 0.1) {
-        let r = radius + sin(t * 3) * 35;
+      let layers = floor(random(4, 8));
 
-        let x = cos(t) * r;
-        let y = sin(t) * r * 0.35;
+      for (let i = layers; i > 0; i--) {
+        let size = map(i, 0, layers, 10, w * 0.9);
 
-        curveVertex(x, y);
+        let c = random(palette);
+        fill(hue(c), saturation(c), brightness(c), 70);
+        stroke(0, 0, 100, 15);
+        strokeWeight(1);
+
+        polygon(0, 0, size, 6);
       }
-      endShape();
 
       pop();
     }
   }
 }
 
-function drawFilaments() {
-  translate(width / 2, height / 2);
-
-  for (let i = 0; i < 600; i++) {
-    let a = random(TWO_PI);
-    let r = random(40, 380);
-
-    let x = cos(a) * r;
-    let y = sin(a) * r;
-
-    let hue = map(r, 40, 380, 40, 320);
-
-    stroke(hue, 60, 100, 70);
-    strokeWeight(random(0.5, 2));
-
-    line(0, 0, x, y);
+function polygon(x, y, radius, npoints) {
+  beginShape();
+  for (let a = 0; a < TWO_PI; a += TWO_PI / npoints) {
+    let sx = x + cos(a) * radius;
+    let sy = y + sin(a) * radius;
+    vertex(sx, sy);
   }
+  endShape(CLOSE);
 }
 
-function drawDust() {
-  for (let i = 0; i < 3000; i++) {
+function drawGlow() {
+  noStroke();
+
+  for (let i = 0; i < 80; i++) {
     let x = random(width);
     let y = random(height);
 
-    stroke(random(360), 40, 100, random(20, 80));
-    strokeWeight(random(0.3, 1.5));
+    let r = random(80, 200);
 
-    point(x, y);
+    for (let j = r; j > 0; j -= 4) {
+      fill(200, 40, 100, 2);
+      circle(x, y, j);
+    }
+  }
+}
+
+function drawFilmGrain() {
+  strokeWeight(1);
+
+  for (let i = 0; i < 80000; i++) {
+    stroke(0, 0, 100, 3);
+    point(random(width), random(height));
   }
 }
