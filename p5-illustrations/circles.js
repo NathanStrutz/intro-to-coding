@@ -6,20 +6,20 @@ let circleSize = 200;
 // set the canvas bounds, out from the center
 let bounds = {
   left: -circleSize,
-  right: canvas.width,
+  right: canvas.width + circleSize,
   top: -circleSize,
-  bottom: canvas.height,
+  bottom: canvas.height + circleSize,
 };
 
 // runs once
 var setup = function () {
   createCanvas(canvas.width, canvas.height);
-  background(0);
   noLoop();
 };
 
 // runs continuously in a rendering loop
 var draw = function () {
+  background(0);
   noFill();
   strokeWeight(15);
   for (let index = 0; index < (canvas.width * canvas.height) / 2000; index++) {
@@ -36,5 +36,5 @@ var draw = function () {
   }
 };
 
-// draw as long as the mouse is pressed
+// draw when the mouse is pressed
 window.mousePressed = draw;
