@@ -1,3 +1,6 @@
+///<reference path="../lib/p5.global.d.ts" />
+
+
 function setup() {
   createCanvas(400, 400);
   noLoop();
