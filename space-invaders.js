@@ -33,6 +33,11 @@ class Alien {
   draw() {
     fill("white");
     square(this.x, this.y, 50);
+
+    if (ceil(random(1000)) === 15) {
+      bombs.push(new Bomb(this));
+    } else {
+    }
   }
 }
 class Army {
@@ -90,7 +95,17 @@ class Tank {
   }
 }
 class Bomb {
-  draw() {}
+  constructor(alien) {
+    this.x = army.x + alien.x + 25;
+    this.y = army.y + alien.y + 50;
+  }
+  vy = 4;
+  draw() {
+    this.y += this.vy;
+    fill("green");
+    rect(this.x, this.y, 5, 10);
+    ellipse(this.x + 2.5, this.y + 20, 15, 30);
+  }
 }
 class Bullet {
   x = mouseX;
