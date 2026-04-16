@@ -26,28 +26,45 @@ class Mothership {
   }
 }
 class Alien {
-  draw() {}
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  draw() {
+    fill("white");
+    square(this.x, this.y, 50);
+  }
 }
 class Army {
+  constructor() {
+    for (let y = 0; y < 3; y++) {
+      for (let x = 0; x < 8; x++) {
+        let offsetX = random(70, 80);
+        let offsetY = random(70, 80);
+        this.aliens.push(new Alien(x * offsetX, y * offsetY));
+      }
+    }
+  }
+  x = 100;
+  y = 150;
+  vx = -1;
+  aliens = [];
   draw() {
-    for (let x = 0; x < 8; x++) {
-      let y = 150;
-      let offset = 75;
-      fill("white");
-      square(offset + 75 * x, y, 50);
+    this.x += this.vx;
+    if (this.x < 10) {
+      this.vx = 1;
+      this.y += 5;
     }
-    for (let x = 0; x < 9; x++) {
-      let y = 250;
-      let offset = 45;
-      fill("white");
-      square(offset + 75 * x, y, 50);
+    if (this.x > 200) {
+      this.vx = -1;
+      this.y += 5;
     }
-    for (let x = 0; x < 8; x++) {
-      let y = 350;
-      let offset = 65;
-      fill("white");
-      square(offset + 75 * x, y, 50);
+    push();
+    translate(this.x, this.y);
+    for (let alien of this.aliens) {
+      alien.draw();
     }
+    pop();
   }
 }
 class Bunker {
@@ -76,7 +93,34 @@ class Bomb {
   draw() {}
 }
 class Bullet {
-  draw() {}
+  x = mouseX;
+  y = height - 35;
+  vy = -5;
+  w = 5;
+  h = 20;
+  draw() {
+    this.y += this.vy;
+    fill("orangered");
+    rect(this.x, this.y, this.w, this.h);
+
+    if (this.y < 0) {
+      bullets.splice(bullets.indexOf(this), 1);
+    }
+    this.checkIfHitAlien();
+  }
+  checkIfHitAlien() {
+    for (let alien of army.aliens) {
+      if (
+        this.x + this.w > army.x + alien.x &&
+        this.x < army.x + alien.x + 50 &&
+        this.y + this.h > army.y + alien.y &&
+        this.y < army.y + alien.y + 50
+      ) {
+        bullets.splice(bullets.indexOf(this), 1);
+        army.aliens.splice(army.aliens.indexOf(alien), 1);
+      }
+    }
+  }
 }
 
 // Hoist the main variables out of p5
@@ -86,6 +130,8 @@ let mothership;
 let army;
 let bunkerHill;
 let tank;
+let bullets = [];
+let bombs = [];
 
 var setup = function () {
   createCanvas(800, 600);
@@ -105,4 +151,17 @@ var draw = function () {
   army.draw();
   bunkerHill.draw();
   tank.draw();
+
+  for (let bullet of bullets) {
+    bullet.draw();
+  }
+  for (let bomb of bombs) {
+    bomb.draw();
+  }
+};
+
+var mouseClicked = function () {
+  if (bullets.length < 6) {
+    bullets.push(new Bullet());
+  }
 };
