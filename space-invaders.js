@@ -33,36 +33,32 @@ class Alien {
   draw() {
     fill("white");
     square(this.x, this.y, 50);
-
-    if (ceil(random(1000)) === 15) {
-      bombs.push(new Bomb(this));
-    } else {
-    }
   }
 }
 class Army {
   constructor() {
     for (let y = 0; y < 3; y++) {
       for (let x = 0; x < 8; x++) {
-        let offsetX = random(70, 80);
-        let offsetY = random(70, 80);
-        this.aliens.push(new Alien(x * offsetX, y * offsetY));
+        let offset = 75;
+        this.aliens.push(new Alien(x * offset, y * offset));
       }
     }
   }
-  x = 100;
-  y = 150;
-  vx = -1;
+  x = 50;
+  y = 100;
+  vx = 5;
+  vy = 5;
   aliens = [];
+
   draw() {
     this.x += this.vx;
     if (this.x < 10) {
-      this.vx = 1;
-      this.y += 5;
+      this.vx = abs(this.vx);
+      this.y += this.vy;
     }
-    if (this.x > 200) {
-      this.vx = -1;
-      this.y += 5;
+    if (this.x > 220) {
+      this.vx = -abs(this.vx);
+      this.y += this.vy;
     }
     push();
     translate(this.x, this.y);
@@ -95,48 +91,24 @@ class Tank {
   }
 }
 class Bomb {
-  constructor(alien) {
-    this.x = army.x + alien.x + 25;
-    this.y = army.y + alien.y + 50;
-  }
-  vy = 4;
-  draw() {
-    this.y += this.vy;
-    fill("green");
-    rect(this.x, this.y, 5, 10);
-    ellipse(this.x + 2.5, this.y + 20, 15, 30);
-  }
+  draw() {}
 }
 class Bullet {
-  x = mouseX;
-  y = height - 35;
-  vy = -5;
-  w = 5;
-  h = 20;
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  vy = -10;
   draw() {
     this.y += this.vy;
-    fill("orangered");
-    rect(this.x, this.y, this.w, this.h);
-
-    if (this.y < 0) {
-      bullets.splice(bullets.indexOf(this), 1);
-    }
-    this.checkIfHitAlien();
-  }
-  checkIfHitAlien() {
-    for (let alien of army.aliens) {
-      if (
-        this.x + this.w > army.x + alien.x &&
-        this.x < army.x + alien.x + 50 &&
-        this.y + this.h > army.y + alien.y &&
-        this.y < army.y + alien.y + 50
-      ) {
-        bullets.splice(bullets.indexOf(this), 1);
-        army.aliens.splice(army.aliens.indexOf(alien), 1);
-      }
-    }
+    fill("red");
+    rect(this.x, this.y, 5, 20);
   }
 }
+
+var mousePressed = function () {
+  bullets.push(new Bullet(mouseX, height - 35));
+};
 
 // Hoist the main variables out of p5
 let score;
@@ -172,11 +144,5 @@ var draw = function () {
   }
   for (let bomb of bombs) {
     bomb.draw();
-  }
-};
-
-var mouseClicked = function () {
-  if (bullets.length < 6) {
-    bullets.push(new Bullet());
   }
 };
