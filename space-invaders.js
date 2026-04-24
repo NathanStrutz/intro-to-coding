@@ -1,21 +1,23 @@
 ///<reference path="lib/p5.global.d.ts" />
 
 class Score {
+  points = 0;
   draw() {
     textSize(15);
     fill("white");
     textAlign(RIGHT);
-    text("00000", 50, 30);
+    text(this.points, 50, 30);
     textAlign(LEFT);
     text("Score", 60, 30);
   }
 }
 class Lives {
+  count = 3;
   draw() {
     textAlign(RIGHT);
     text("Lives", width - 40, 30);
     textAlign(LEFT);
-    text("3", width - 30, 30);
+    text(this.count, width - 30, 30);
   }
 }
 class Mothership {
@@ -30,9 +32,14 @@ class Alien {
     this.x = x;
     this.y = y;
   }
+  size = 50;
   draw() {
     fill("white");
-    square(this.x, this.y, 50);
+    square(this.x, this.y, this.size);
+
+    if (round(random(1, 1000)) === 5) {
+      bombs.push(new Bomb(army.x + this.x, army.y + this.y));
+    }
   }
 }
 class Army {
@@ -91,18 +98,58 @@ class Tank {
   }
 }
 class Bomb {
-  draw() {}
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  vy = 10;
+  size = 10;
+  draw() {
+    this.y += this.vy;
+    fill("green");
+    square(this.x, this.y, this.size);
+    let tankLeft = mouseX - 45;
+    let tankTop = height - 35;
+    let tankRight = tankLeft + 100;
+    let tankBottom = tankTop + 25;
+    if (
+      this.x + this.size > tankLeft &&
+      this.x < tankRight &&
+      this.y + this.size > tankTop &&
+      this.y < tankBottom
+    ) {
+      // hit!
+      lives.count--;
+      bombs.splice(bombs.indexOf(this));
+    }
+  }
 }
 class Bullet {
   constructor(x, y) {
     this.x = x;
     this.y = y;
   }
+  w = 5;
+  h = 20;
   vy = -10;
   draw() {
     this.y += this.vy;
     fill("red");
-    rect(this.x, this.y, 5, 20);
+    rect(this.x, this.y, this.w, this.h);
+
+    for (let alien of army.aliens) {
+      if (
+        this.x + this.w > army.x + alien.x &&
+        this.x < army.x + alien.x + alien.size &&
+        this.y + this.h > army.y + alien.y &&
+        this.y < army.y + alien.y + alien.size
+      ) {
+        // HIT!
+        score.points += army.y + alien.y;
+        army.aliens.splice(army.aliens.indexOf(alien), 1);
+        bullets.splice(bullets.indexOf(this), 1);
+      }
+    }
   }
 }
 
@@ -144,5 +191,23 @@ var draw = function () {
   }
   for (let bomb of bombs) {
     bomb.draw();
+  }
+
+  if (army.aliens.length === 0) {
+    textSize(100);
+    textAlign(CENTER);
+    text("YOU WIN!", width / 2, height / 2);
+    textSize(40);
+    text(score.points, width / 2, height / 2 + 75);
+    noLoop();
+  }
+
+  if (lives.count === 0) {
+    textSize(100);
+    textAlign(CENTER);
+    text("YOU LOSE!", width / 2, height / 2);
+    textSize(40);
+    text(score.points, width / 2, height / 2 + 75);
+    noLoop();
   }
 };
