@@ -32,12 +32,13 @@ class Alien {
     this.x = x;
     this.y = y;
   }
+  chanceOfShooting = 1000;
   size = 50;
   draw() {
     fill("white");
     square(this.x, this.y, this.size);
 
-    if (round(random(1, 1000)) === 5) {
+    if (round(random(1, this.chanceOfShooting)) === 5) {
       bombs.push(new Bomb(army.x + this.x, army.y + this.y));
     }
   }
@@ -67,6 +68,14 @@ class Army {
       this.vx = -abs(this.vx);
       this.y += this.vy;
     }
+
+    if (this.y > 250) {
+      this.vy = -abs(this.vy);
+      this.vx = this.vx + 2;
+    }
+    if (this.y < 100) {
+      this.vy = abs(this.vy);
+    }
     push();
     translate(this.x, this.y);
     for (let alien of this.aliens) {
@@ -76,15 +85,30 @@ class Army {
   }
 }
 class Bunker {
-  draw() {}
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  w = 125;
+  h = 50;
+  damage = 0; // 100 = dead!
+  draw() {
+    fill(this.damage * 2 + 55, 50, 50);
+    rect(this.x, this.y, this.w, this.h);
+  }
 }
 class BunkerHill {
-  draw() {
-    fill("orange");
+  constructor() {
+    this.bunkers = [];
     let shieldYLevel = height - 125;
-    rect(75, shieldYLevel, 125, 50);
-    rect(325, shieldYLevel, 125, 50);
-    rect(575, shieldYLevel, 125, 50);
+    this.bunkers.push(new Bunker(75, shieldYLevel));
+    this.bunkers.push(new Bunker(325, shieldYLevel));
+    this.bunkers.push(new Bunker(575, shieldYLevel));
+  }
+  draw() {
+    for (let bunker of this.bunkers) {
+      bunker.draw();
+    }
   }
 }
 class Tank {
@@ -112,6 +136,8 @@ class Bomb {
     let tankTop = height - 35;
     let tankRight = tankLeft + 100;
     let tankBottom = tankTop + 25;
+
+    // bombs hitting the tank
     if (
       this.x + this.size > tankLeft &&
       this.x < tankRight &&
@@ -121,6 +147,23 @@ class Bomb {
       // hit!
       lives.count--;
       bombs.splice(bombs.indexOf(this));
+    }
+
+    // bombs hitting the bunkers
+    for (let bunker of bunkerHill.bunkers) {
+      if (
+        this.x + this.size > bunker.x &&
+        this.x < bunker.x + bunker.w &&
+        this.y + this.size > bunker.y &&
+        this.y < bunker.y + bunker.h
+      ) {
+        // HIT!
+        bunker.damage += 2;
+        bombs.splice(bombs.indexOf(this), 1);
+        if (bunker.damage >= 100) {
+          bunkerHill.bunkers.splice(bunkerHill.bunkers.indexOf(bunker), 1);
+        }
+      }
     }
   }
 }
@@ -137,6 +180,7 @@ class Bullet {
     fill("red");
     rect(this.x, this.y, this.w, this.h);
 
+    // bullets hitting aliens
     for (let alien of army.aliens) {
       if (
         this.x + this.w > army.x + alien.x &&
@@ -148,6 +192,23 @@ class Bullet {
         score.points += army.y + alien.y;
         army.aliens.splice(army.aliens.indexOf(alien), 1);
         bullets.splice(bullets.indexOf(this), 1);
+      }
+    }
+
+    // bullets hitting bunkers
+    for (let bunker of bunkerHill.bunkers) {
+      if (
+        this.x + this.w > bunker.x &&
+        this.x < bunker.x + bunker.w &&
+        this.y + this.h > bunker.y &&
+        this.y < bunker.y + bunker.h
+      ) {
+        // HIT!
+        bunker.damage += 10;
+        bullets.splice(bullets.indexOf(this), 1);
+        if (bunker.damage >= 100) {
+          bunkerHill.bunkers.splice(bunkerHill.bunkers.indexOf(bunker), 1);
+        }
       }
     }
   }
