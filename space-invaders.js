@@ -21,10 +21,22 @@ class Lives {
   }
 }
 class Mothership {
+  x = 150;
+  y = 50;
+  w = 100;
+  h = 40;
   draw() {
     noStroke();
-    fill("red");
-    rect(150, 50, 100, 40);
+    fill("blue");
+    rect(this.x, this.y, this.w, this.h);
+
+    if (army.aliens.length < 10) {
+      if (round(random(1, 20)) === 5) {
+        bombs.push(
+          new Bomb(this.x + random(0, this.w), this.y + random(0, this.h)),
+        );
+      }
+    }
   }
 }
 class Alien {
@@ -32,13 +44,12 @@ class Alien {
     this.x = x;
     this.y = y;
   }
-  chanceOfShooting = 1000;
   size = 50;
   draw() {
     fill("white");
     square(this.x, this.y, this.size);
 
-    if (round(random(1, this.chanceOfShooting)) === 5) {
+    if (round(random(1, army.chanceOfShooting)) === 5) {
       bombs.push(new Bomb(army.x + this.x, army.y + this.y));
     }
   }
@@ -57,21 +68,23 @@ class Army {
   vx = 5;
   vy = 5;
   aliens = [];
+  chanceOfShooting = 1000;
 
   draw() {
     this.x += this.vx;
     if (this.x < 10) {
       this.vx = abs(this.vx);
       this.y += this.vy;
+      this.chanceOfShooting = max(50, this.chanceOfShooting - 20);
     }
     if (this.x > 220) {
       this.vx = -abs(this.vx);
       this.y += this.vy;
+      this.chanceOfShooting = max(50, this.chanceOfShooting - 20);
     }
 
     if (this.y > 250) {
       this.vy = -abs(this.vy);
-      this.vx = this.vx + 2;
     }
     if (this.y < 100) {
       this.vy = abs(this.vy);
@@ -146,7 +159,8 @@ class Bomb {
     ) {
       // hit!
       lives.count--;
-      bombs.splice(bombs.indexOf(this));
+      // bombs.splice(bombs.indexOf(this));
+      bombs = [];
     }
 
     // bombs hitting the bunkers
